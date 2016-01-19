@@ -1,0 +1,31 @@
+#set($title="赞服务-消息")
+#set($layout = "layout/commonLayout.vm")
+
+<link rel="stylesheet" type="text/css" href="$staticHttp/styles/message.css">
+
+<div class="imsg-list">
+    #if($consultVoList && $consultVoList.size() > 0)
+        #foreach($consultVo in $consultVoList)
+            <div class="imsg-item" data-href="/consult/$consultVo.consult.id">
+                #if($consultVo.buyer.id == $selfId)
+                    <h3>$consultVo.seller.name</h3>
+                #else
+                    <h3>$consultVo.buyer.mobile  /  $consultVo.buyer.name</h3>
+                #end
+                <div class="msg-con ellipsis">
+                    $!consultVo.consult.content
+                </div>
+                <div class="time">$consultVo.date</div>
+            </div>
+        #end
+    #else
+        <div class="iconfont">&#xe608;</div>
+        <div class="text-center">当前没消息哦</div>
+    #end
+</div>
+
+<script type="text/javascript">
+    seajs.use(["gaoding"],function(){
+
+    })
+</script>

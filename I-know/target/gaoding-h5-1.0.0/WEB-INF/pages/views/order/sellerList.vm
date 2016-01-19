@@ -1,0 +1,98 @@
+#set($title = "订单列表")
+#set($layout = "layout/commonLayout.vm")
+
+<link rel="stylesheet" type="text/css" href="$staticHttp/styles/myorder.css">
+<link rel="stylesheet" href="$staticHttp/styles/my.css">
+
+<div class="nav">
+    <ul class="cf">
+        <li class="fl" data-href="/order/seller/list?type=1">
+            <div #if($orderType == 1) class="active" #end>
+                <span>进行中</span>
+            </div>
+        </li>
+        <li class="fl" data-href="/order/seller/list?type=2">
+            <div #if($orderType == 2) class="active" #end>
+                <span>已完成</span>
+            </div>
+        </li>
+        <li class="fl" data-href="/order/seller/list">
+            <div #if($orderType == 0) class="active" #end>
+                <span>全部</span>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="panel-group bg-tans">
+    #foreach($orderDetail in $orderDetailList)
+        <div class="panel">
+            <div class="panel-bd" data-href="/order/$orderDetail.fuwuOrder.orderNo/detail">
+                <div class="panel-title text-ellipsis">$orderDetail.fuwuCopy.name</div>
+                <div class="gd-price mt10">
+                    <span class="rem ft-bs">¥</span>
+                    <span class="price ft-bs">$orderDetail.fuwuCopy.price</span>
+                    #if($orderDetail.fuwuCopy.priceType.value == 3)
+                        <span class="per"> 起</span>
+                    #end
+                </div>
+                <hr class="mt20">
+                <div class="gdt-card">
+                    <span class="ft-gray">买家信息</span>
+                    <p class="ft-bs"><span class="member-name">$orderDetail.orderDemand.name</span>$!orderDetail.orderDemand.title #if($orderDetail.orderDemand.company != "" && $orderDetail.orderDemand.title != "") / #end $!orderDetail.orderDemand.company</p>
+                </div>
+            </div>
+            <div class="panel-footer status cf">
+                #if($orderDetail.fuwuOrder.status.value == 0)
+                    <span class="status-text">等待买家付款</span>
+                #elseif($orderDetail.fuwuOrder.status.value == 1)
+                    <span class="fl status-text">买家已付款到平台</span>
+                    <button class="btn btn-tans fr order-btn sellerAcceptBtn" href="/order/$orderDetail.fuwuOrder.orderNo/seller/accept" confirm-text="请确认您要接受此订单，确认后表示您同意为买家提供此服务。">接受</button>
+                #elseif($orderDetail.fuwuOrder.status.value == 2)
+                    #set($currentPhase = $orderDetail.currentOrderPhaseDetailVo.fuwuOrderPhase)
+                    #if($currentPhase.status.value == 0)
+                        #if($currentPhase.orderIndex > 0)
+                            <span class="status-text">等待买家支付阶段$currentPhase.orderIndex费用</span>
+                        #else
+                            <span class="status-text">等待买家支付服务费用</span>
+                        #end
+                    #elseif($currentPhase.status.value == 1)
+                        #if($currentPhase.orderIndex > 0)
+                            <span class="fl status-text">买家已支付阶段$currentPhase.orderIndex费用</span>
+                            <button class="btn btn-tans fr order-btn completeFuwuBtn" data-href="/order/$orderDetail.fuwuOrder.orderNo/seller/complete" confirm-text="请确认您已按照服务描述完成阶段$currentPhase.orderIndex服务，否则可能导致买家投诉。">完成阶段$currentPhase.orderIndex</button>
+                        #else
+                            <span class="fl status-text">买家已支付服务费用到平台</span>
+                            <button class="btn btn-tans fr order-btn completeFuwuBtn" data-href="/order/$orderDetail.fuwuOrder.orderNo/seller/complete" confirm-text="请确认您已按照服务描述完成全部服务，否则可能导致买家投诉。">完成服务</button>
+                        #end
+                    #elseif($currentPhase.status.value == 2)
+                        <span class="status-text">等待买家确认付款</span>
+                    #end
+                #elseif($orderDetail.fuwuOrder.status.value == 3)
+                    <span class="status-text">订单已完成,等待买家评论</span>
+                #elseif($orderDetail.fuwuOrder.status.value == 4)
+                    <span class="status-text">买家已评论</span>
+                #else
+                    <span class="status-text">订单已关闭</span>
+                #end
+            </div>
+        </div>
+    #end
+</div>
+
+#set($navIndex = 2)
+#renheparse("common/bottomNav.vm")
+<script type="text/javascript">
+    seajs.use("$",function(){
+        $(".sellerAcceptBtn").click(function() {
+            if (confirm($(this).attr("confirm-text"))) {
+                location.href = $(this).attr("href");
+            }
+        });
+        $(".completeFuwuBtn").click(function() {
+            var text = $(this).attr('confirm-text');
+            if (confirm(text)) {
+                var url = $(this).attr('href');
+                location.href = url;
+            }
+        });
+    });
+</script>

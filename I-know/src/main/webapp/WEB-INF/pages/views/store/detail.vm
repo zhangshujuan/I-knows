@@ -1,0 +1,158 @@
+#set($title="${pageTitle}")
+#set($page_keywords="#if($sellerInfoVo.sellerTagList && $sellerInfoVo.sellerTagList.size() > 0 )#foreach($sellerTag in $sellerInfoVo.sellerTagList)#if($velocityCount > 1)，#end${sellerTag.tag}#end#end")
+#set($layout = "layout/commonLayout.vm")
+
+<link rel="stylesheet" type="text/css" href="$staticHttp/styles/zfw-store.css">
+<div class="gdm-dianpu-hd">
+    <div class="userImgBox">
+		<div class="circle" style="box-sizing: border-box; line-height: 0; width:  2.944rem; height:  2.944rem; border:4px solid #fff;background-image: url($seller.userface); background-size: contain; background-position: 50% 50%; background-repeat: no-repeat;"></div>
+    </div>
+    <div class="gdm-title">$!{seller.name}</div>
+    <p>$!{seller.company} #if($seller.company != "" && $seller.title != "") / #end $!{seller.title}</p>
+    <button class="btn btn-danger round btw180 mt20" data-href="/seller/$!{seller.id}/ask" #if($isSelf)style="display: none"#end>咨询</button>
+    <p class="cf">
+        <span class="fl address"><i class="iconfont">&#xe603;</i>$sellerInfoVo.addressName</span>
+        <span id="collectCountSpan" class="fr favnum">
+            <span class="fav-number">$!{collectCount}</span>
+            #if($isStoreCollected)
+                <i class="iconfont icon-shoucangyishoucang"></i>
+            #else
+                <i class="iconfont icon-shoucangweishoucang"></i>
+            #end
+        </span>
+    </p>
+</div>
+<ul class="well-list">
+    #if($sellerInfoVo.sellerTagList && $sellerInfoVo.sellerTagList.size() > 0)
+        <li>
+            <span class="fl">擅长领域：</span>
+			<span class="fr">
+            #foreach($sellerTag in $sellerInfoVo.sellerTagList)
+                #if($velocityCount > 1)、#end$sellerTag.tag
+			#end
+			</span>
+        </li>
+    #end
+</ul>
+<div class="dianpu-nav-height">
+    <ul class="gdm-dianpu-nav">
+    	<li title="service">
+            <div><i class="iconfont icon-xingyetubiao13"></i><span class="fs26">服务</span></div>
+        </li>
+        <li title="introduce">
+            <div><i class="iconfont icon-xingyetubiaohuaban5js14"></i><span class="fs26">介绍</span>
+    		</div>
+        </li>
+        <li title="case">
+            <div><i class="iconfont icon-xingyetubiao28"></i><span class="fs26">案例</span></div>
+        </li>
+    </ul>
+</div>
+<div class="panel-group mt20">
+    <div class="panel-group-title" id="index_service">
+        <div class="panel-title">服务</div>
+    </div>
+	#if($!{fuwuItemVoList} && $fuwuItemVoList.size() > 0)
+        #foreach($fuwuItemVo in $fuwuItemVoList)
+            <div class="panel" data-href="/fuwu/$fuwuItemVo.fuwu.id/detail">
+                <div class="panel-bd">
+                    <div class="panel-title">$fuwuItemVo.fuwu.name</div>
+                    <div class="taglist cf">
+                        #foreach($tag in $fuwuItemVo.fuwuTagList)
+                            <span class="tag">$tag.tag</span>
+                        #end
+                    </div>
+                    <div class="gd-price">
+                        <span class="rem">¥</span>
+                        <span class="price">$fuwuItemVo.fuwu.price</span>
+                        #if($fuwuItemVo.fuwu.priceType.value == 3)
+                            <span class="per"> 起</span>
+                        #end
+                    </div>
+                </div>
+            </div>
+		#end
+	#end
+</div>
+<div class="panel mt20" id="index_introduce">
+    <div class="panel-hd">
+        <div class="panel-title">卖家介绍</div>
+    </div>
+	#if($!{sellerInfoVo.sellerInfo.description})
+    <div class="panel-bd">
+        <p class="fuwu-description">
+            $vmUtil.line2BR($sellerInfoVo.sellerInfo.description)
+        </p>
+    </div>
+	#end
+</div>
+<div class="panel mt20" id="index_case">
+    <div class="panel-hd">
+        <div class="panel-title">案例</div>
+    </div>
+	#if($!{sellerCaseList} && $sellerCaseList.size() > 0)
+        <div class="panel-bd panel-bd-list">
+            #foreach($sellerCase in $sellerCaseList)
+                <div class="item" data-href="$sellerCase.link">
+                    <div>$sellerCase.title</div>
+                    <span class="iconfont icon-right">&#xe60c;</span>
+                    <hr>
+                </div>
+			#end
+        </div>
+	#end
+</div>
+
+
+<!--
+<div class="panel">
+    <div class="panel-hd">
+        <div class="panel-title">资料</div>
+    </div>
+    <div class="panel-bd panel-bd-list">
+        <img src="#">
+    </div>
+</div>
+-->
+<div class="text-center">
+    <br><br>
+    <p><span class="fs-bs callback-index" data-href="/index">返回赞服务首页</span></p>
+    <br>
+    <p class="fs-bs">本店铺由赞服务提供技术支持</p>
+    <br><br>
+</div>
+
+#if($isSelf)
+    <div class="bottom store-bottom">如需修改店铺信息，请联系： <br>微信: zanfuwu </div>
+#end
+## 微信分享
+#if($weixinJSData)
+    #set($shareImage = "$seller.userface")
+    #set($shareTitle = "$seller.name的店铺")
+    #set($shareDesc = "$vmUtil.weixinDesc($sellerInfoVo.sellerInfo.description)")
+    #renheparse("common/weixinShare.vm")
+#end
+
+<script type="text/javascript">seajs.use("$",function(){})</script>
+<script type="text/javascript">
+    seajs.use(["jquery","scrollfix"],function($){
+		 $('#collectCountSpan i').click(function(){
+		 	var $this = $(this);
+		 	var num = $(".fav-number").text();
+			if($this.hasClass("icon-shoucangweishoucang")){
+				$this.addClass("icon-shoucangyishoucang").removeClass("icon-shoucangweishoucang");
+				$(".fav-number").html(parseInt(num)+1);
+			} else {
+				$this.removeClass("icon-shoucangyishoucang").addClass("icon-shoucangweishoucang");
+				$(".fav-number").html(parseInt(num)-1);
+			}
+		 });
+
+		$(".gdm-dianpu-nav li").click(function(event) { 
+          var index = this.title;
+          var id = '#'+'index_'+index;
+          $("html,body").animate({scrollTop: $(id).offset().top - $(".dianpu-nav-height").height()}, 1000);
+       });
+	   $(".gdm-dianpu-nav").scrollFix();
+    })
+</script>

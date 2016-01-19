@@ -1,0 +1,74 @@
+#set($layout = "layout/commonLayout.vm")
+#set($title = "个人信息")
+<link rel="stylesheet" href="$staticHttp/styles/personinfo.css">
+
+<form id="updateMemberInfoForm" data-remote="true" data-type="json" action="/member/save/profile" method="post">
+<div class="panel panel-personInfo">
+    <div class="panel-hd panel-item">
+        <div class="fl panel-item-title">联系人</div>
+        <div class="fr">
+            <input class="panel-contain" type="text" name="name" value="$member.name" />
+        </div>
+    </div>
+    <div class="panel-hd panel-item">
+        <div class="fl panel-item-title">联系电话</div>
+        <div class="fr">
+            <input class="panel-contain" type="text" value="$member.mobile" />
+        </div>
+    </div>
+    <div class="panel-hd panel-item">
+        <div class="fl panel-item-title">地区</div>
+        <div class="fr" id="area">
+            <select class="province form-control" name="prov" data-first-title="选择省" data-value="$member.prov" value="$member.prov" data-json-value='v' disabled="disabled"></select>
+            <select class="city form-control" name="city" data-first-title="选择市" data-value="$member.city" value="$member.city" data-json-value='v' disabled="disabled"></select>
+        </div>
+    </div>
+    <div class="panel-hd panel-item">
+        <div class="fl panel-item-title">从事行业</div>
+        <div class="fr" id="industryArea">
+            <select class="industry form-control" name="industry" data-value="$member.industry" value="$member.industry" data-json-value='v' disabled="disabled"></select>
+        </div>
+    </div>
+    <div class="panel-hd panel-item">
+        <div class="fl panel-item-title">工作年限</div>
+        <div class="fr">
+            <input class="panel-contain" name="work_age" type="text" value="$member.workAge"/>
+        </div>
+    </div>
+    <div class="panel-hd panel-item">
+        <div class="fl panel-item-title">当前公司</div>
+        <div class="fr">
+            <input class="panel-contain" name="company" type="text" value="$member.company"/>
+        </div>
+    </div>
+    <div class="panel-hd panel-item">
+        <div class="fl panel-item-title">职业</div>
+        <div class="fr">
+            <input class="panel-contain" name="title" type="text" value="$member.title"/>
+        </div>
+    </div>
+</div>
+    <button class="btn btn-danger btn90 radius-lg mt20">保存</button>
+</form>
+
+<script type="text/javascript">
+    seajs.use(["jquery", "cxselect", "rails"],function(jQ){
+        jQ('#area').cxSelect({
+            url: '/ajax/address',
+            selects: ['province', 'city'],
+            nodata: 'none'
+        })
+        jQ("#industryArea").cxSelect({
+            url: '/ajax/industry',
+            selects: ['industry'],
+            nodata: 'none'
+        });
+        jQ("#updateMemberInfoForm").on("ajax:success",function(e,res) {
+            if (res.errorCode == 0) {
+                gaoding.alert("保存成功");
+            } else {
+                gaoding.alert(res.errorInfo);
+            }
+        })
+    })
+</script>

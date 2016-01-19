@@ -1,0 +1,244 @@
+#set($title = "订单详情")
+#set($layout = "layout/commonLayout.vm")
+
+<link rel="stylesheet" type="text/css" href="$staticHttp/styles/order-detial.css">
+
+#set($seller = $orderDetail.seller)
+#set($orderPhaseDetailList = $orderDetail.orderPhaseDetailVoList)
+#set($currentOrderPhaseDetail = $orderDetail.currentOrderPhaseDetailVo)
+#set($currentPhaseIndex = $orderDetail.fuwuOrder.currentPhase)
+#set($currentPhaseStatus = $currentOrderPhaseDetail.fuwuOrderPhase.status.value)
+<div class="panel">
+    <div class="panel-hd">
+        <div class="panel-title">订单状态</div>
+    </div>
+    <div class="panel-bd order-status">
+        <ul>
+            #foreach($orderProcessRecordVo in $orderProcessRecordList)
+                #if($orderProcessRecordVo.orderProcessRecord.content != "")
+                    <li #if($velocityCount == 1)class="has-cricle active" #else class="has-cricle" #end>
+                        <p>$orderProcessRecordVo.orderProcessRecord.content</p>
+                        <div class="time">$orderProcessRecordVo.processTime</div>
+                    </li>
+					<li class="no-cricle"></li>
+                #end
+            #end
+			<li class="has-cricle"><p>订单$orderDetail.fuwuOrder.orderNo</p></li>
+			<li class="no-cricle"></li>
+        </ul>
+    </div>
+</div>
+<div class="panel-group mt20">
+    <div class="panel">
+        <div class="panel-hd">
+            <div class="panel-title">订单信息</div>
+        </div>
+        <div class="panel-bd">
+            <div class="panel-title text-ellipsis">$orderDetail.fuwuCopy.name</div>
+            <div class="gd-price">
+                <span class="rem">¥</span>
+                <span class="price">$orderDetail.fuwuCopy.price</span>
+                #if($orderDetail.fuwuCopy.priceType.value == 3)
+                    <span class="per"> 起</span>
+                #end
+            </div>
+            <div class="gdt-card">
+                <span class="userimgbox"><div class="circle" style="box-sizing: border-box; line-height: 0; width: 1.92rem; height: 1.92rem; border:2px solid #E8E8E8;background-image: url($seller.userface); background-size: contain; background-position: 50% 50%; background-repeat: no-repeat;"></div></span>
+                <p class="ellipsis"><span class="member-name">$seller.name</span>$seller.title #if($seller.company != "" && $seller.title != "") / #end $seller.company</p>
+            </div>
+            #if($orderDetail.fuwuOrder.status.value >= 1 || $orderDetail.fuwuCopy.priceType.value > 0)
+                <a href="tel://$seller.mobile">
+                    <div class="gdt-contacts cf">
+                        <span class="ft-gray">卖家电话</span>
+                        <span class="ft-bs">$seller.mobile</span>
+                    </div>
+                </a>
+            #end
+        </div>
+    </div>
+</div>
+
+## 买家信息
+<div class="panel-group mt20">
+    <div class="panel">
+        <div class="panel-hd">
+            <div class="panel-title">买家信息</div>
+        </div>
+        #set($orderDemand = $orderDemandVo.orderDemand)
+        <ul class="detial-list tran-slide up">
+            <li class="item">
+                <span class="tt">联系人</span>
+                <span class="tb">$orderDemand.name</span>
+            </li>
+            <li class="item">
+                <a href="tel://$orderDemand.mobile">
+                    <span class="tt">联系电话</span>
+                    <span class="tb">$orderDemand.mobile</span>
+                </a>
+            </li>
+            <li class="item">
+                <span class="tt">地区</span>
+                <span class="tb">$orderDemandVo.addressText</span>
+            </li>
+            <li class="item">
+                <span class="tt">从事行业</span>
+                <span class="tb">$orderDemandVo.industryText</span>
+            </li>
+            <li class="item">
+                <span class="tt">工作年限</span>
+                <span class="tb">$orderDemand.workAge年</span>
+            </li>
+            <li class="item">
+                <span class="tt">当前公司</span>
+                <span class="tb">$!orderDemand.company</span>
+            </li>
+            <li class="item">
+                <span class="tt">职业</span>
+                <span class="tb">$!orderDemand.title</span>
+            </li>
+            <li class="item">
+                <span class="tt">需求描述</span>
+                <div class="tb">$orderDemand.demand</div>
+            </li>
+        </ul>
+        <div class="panel-footer js-slide">
+            <p class="text-center ft-gray">
+                <i class="iconfont icon-icon08"></i>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="panel mt20">
+    <div class="panel-hd">
+        <div class="panel-title">付款状态</div>
+    </div>
+    <ul class="gdm-list pay-status fs28">
+        #foreach($orderPhaseDetail in $orderPhaseDetailList)
+            <li class="cf">
+                #if ($orderPhaseDetail.fuwuOrderPhase.status.value == 3)
+                    <div class="s1 fl text-right"><i class="iconfont ft-red">&#xe60b;</i></div>
+                #elseif($orderPhaseDetail.fuwuOrderPhase.orderIndex == $currentPhaseIndex)
+                    <div class="s1 fl text-right"><i class="iconfont ft-red icon-radio"></i></div>
+                #else
+                    <div class="s1 fl"></div>
+                #end
+                #if($currentPhaseIndex > 0)
+                    <div class="s2 fl"><span class="ft-bs">$orderPhaseDetail.fuwuPhaseCopy.name</span></div>
+                    <div class="s3 fl"><em class="ft-bs">￥$orderPhaseDetail.fuwuOrderPhase.payFee</em></div>
+                #else
+                    <div class="s2 fl"><span class="ft-b5">全额付款</span></div>
+                    <div class="s3 fl"><em class="ft-b5">￥$orderPhaseDetail.fuwuOrderPhase.payFee</em></div>
+                #end
+            </li>
+        #end
+    </ul>
+</div>
+
+## 到评论不显示
+#if($orderDetail.fuwuOrder.status.value != 4)
+<div class="text-center">
+    <p class="ft-b5"><br><br><br>如果您遇到与卖家无法协商解决的问题，<br> 请与我们的工作人员联系：4000697055</span><br><br><br></p>
+</div>
+#end
+<div id="statusPanel" class="panel-bottom text-center">
+    #if($orderDetail.fuwuOrder.status.value == 0)
+        <button class="btn btn-tans order-btn ft-red payBtn">支付#if($currentPhaseIndex > 0)阶段$currentPhaseIndex#end##
+费用到平台</button>
+    #elseif($orderDetail.fuwuOrder.status.value == 1)
+        <p class="ft-bs fs34">等待卖家接受</p>
+    #elseif($orderDetail.fuwuOrder.status.value == 2)
+        #if($currentPhaseStatus == 0)
+            <button class="btn btn-tans order-btn ft-red payBtn">支付阶段$currentPhaseIndex费用到平台</button>
+        #elseif($currentPhaseStatus == 1)
+            <p class="ft-bs fs34">等待卖家完成#if($currentPhaseIndex > 0)阶段$currentPhaseIndex#end##
+服务</p>
+        #elseif($currentPhaseStatus == 2)
+            #if($currentPhaseIndex > 0)
+            <button class="btn btn-tans order-btn ft-red confirmFuwuBtn" href="/order/$orderDetail.fuwuOrder.orderNo/buyer/confirm" confirm-text="请确认您已获得阶段$currentPhaseIndex服务，确认后费用将从平台支付给卖家。">确认获得阶段$currentPhaseIndex服务</button>
+            #else
+            <button class="btn btn-tans order-btn ft-red confirmFuwuBtn" href="/order/$orderDetail.fuwuOrder.orderNo/buyer/confirm" confirm-text="请确认您已获得全部服务，确认后费用将从平台支付给卖家。">确认获得全部服务</button>
+            #end
+        #end
+    #elseif($orderDetail.fuwuOrder.status.value == 3)
+        <button class="btn btn-tans order-btn ft-red" data-href="/order/$orderDetail.fuwuOrder.orderNo/comment">发表评论</button>
+    #elseif($orderDetail.fuwuOrder.status.value == 4)
+        <style>
+            #statusPanel {
+                display: none;
+            }
+        </style>
+    #elseif($orderDetail.fuwuOrder.status.value == -1)
+        <p class="ft-bs fs34">订单已关闭</p>
+    #end
+</div>
+
+#if($orderDetail.fuwuOrder.status.value == 4)
+<div class="panel">
+    <div class="panel-hd">
+        <div class="panel-title">您的评价</div>
+    </div>
+    <div class="panel-bd panel-bd-appraises panel-bd-list">
+        #foreach($comment in $commentList)
+            <div class="media">
+                <div class="media-left">
+                    <img src="$member.userface" class="userimg circle">
+                </div>
+                <div class="media-body">
+                    <div class="media-heading">$orderDemand.name<span>$orderDemand.company #if($orderDemand.company != "" && $orderDemand.title != "") / #end $orderDemand.title</span></div>
+                    <p>$comment.content</p>
+                    <p class="cf appra-stars">
+					<span class="fl">评价
+                        #foreach($sc in [1..$comment.score])
+                            <em class="iconfont gd-red icon-xingyetubiao12"></em>
+                        #end
+					</span>
+                        <time class="fr time">$comment.sendTime</time>
+                    </p>
+                </div>
+            </div>
+        #end
+    </div>
+</div>
+#end
+
+<script type="text/javascript">
+    seajs.use(["jquery", "rails"], function(Q) {
+        Q('.js-slide').click(function(e){
+            if(!Q('.tran-slide').hasClass('up')) {
+                Q('.tran-slide').addClass("up");
+                Q(this).find('.iconfont').addClass("icon-icon08").removeClass('icon-shouqi');
+            } else {
+                Q('.tran-slide').removeClass('up');
+                Q(this).find('.iconfont').addClass("icon-shouqi").removeClass('icon-icon08');
+            }
+        });
+        Q('.confirmFuwuBtn').click(function () {
+            var text = Q(this).attr('confirm-text');
+            if (confirm(text)) {
+                var url = Q(this).attr('href');
+                location.href = url;
+            }
+        });
+        Q('.payBtn').click(function() {
+            Q.ajax({
+                url : "/order/weixinpay?orderNo=$orderDetail.fuwuOrder.orderNo",
+                type : "POST",
+                beforeSend : function() {
+                    gaoding.loading().show();
+                },
+                success : function(result) {
+                    var res = $.parseJSON(result);
+                    if (res.errorCode == 0) {
+                        var ref = res.ref;
+                        if (ref.prepayId) {
+                            location.href = "/order/weixinpay?orderNo=$orderNo&prepayId=" + ref.prepayId;
+                        } else if (ref.codeUrl) {
+                            location.href = "/order/weixinpay?orderNo=$orderNo&codeUrl=" + ref.codeUrl;
+                        }
+                    }
+                    gaoding.loading().hide();
+                }
+            });
+        });
+    });
+</script>

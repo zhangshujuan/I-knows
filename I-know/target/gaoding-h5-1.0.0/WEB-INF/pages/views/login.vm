@@ -1,0 +1,80 @@
+#set($title = "手机验证登录")
+#set($layout = "layout/commonLayout.vm")
+
+<link rel="stylesheet" type="text/css" href="$staticHttp/styles/login.css">
+
+<div class="gdm-login center form" q-ctrl="loginCtr">
+    <form id="loginForm" data-remote="true" data-type="json" action="/login" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">+86</div>
+            <input value="" type="text" class="form-control" name="mobile" placeholder="手机号码">
+        </div>
+    </div>
+    <div class="form-group cf auth-code">
+        <input value="" type="text" class="form-control fl" name="verifyCode" placeholder="验证码">
+        <button class="btn btn-default form-btn fr" type="button" q-onclick="sendAuthCode" data-second="60" data-bind-auth="sec">发送验证码</button>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-danger form-btn" q-onclick="checkCode" >手机验证登录</button>
+    </div>
+    </form>
+
+    <div class="form-group help-else" style="display: none;">
+        <hr>
+        <div>或</div>
+    </div>
+    <div class="form-group" style="display: none;">
+        <button class="btn btn-white form-btn">人和网账号授权登录</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    seajs.use(["jquery", "dataBind", "rails"],function(Q,dataBind){
+        var tmStarted = false;
+        var tm = null;
+        var sendAuthUrl = "/ajax/send/code";
+        var dBind = new dataBind("auth");
+        var sendAuthCode = function(e){
+            if(tmStarted) return;
+            var Sec = Q(this).attr('data-second')*1;
+            Q.ajax({
+                url:sendAuthUrl,
+                dataType:'json',
+                type: 'post',
+                data:{
+                    mobile : Q('[name="mobile"]').val()
+                },
+                success:function(data){
+                    if(data.errorCode==0){
+                        //发送成功
+                    } else {
+                        gaoding.alert(data.errorInfo);
+                    }
+                }
+            })
+            tm = setInterval(function(){
+                Sec--;
+                dBind.set("sec",Sec+'秒后重发');
+                tmStarted = true;
+                if(Sec<=0){
+                    clearInterval(tm);
+                    dBind.set("sec",'重发');
+                    tmStarted = false;
+                }
+            },1000)
+        }
+        Q('[q-onclick="sendAuthCode"]').on("click",sendAuthCode);
+
+        Q("#loginForm").on("ajax:success",function(e,res) {
+            if (res.errorCode == 0) {
+                gaoding.alert("登录成功", function() {
+                    window.location.href="$gotoUrl";
+                }, 1000);
+            } else {
+                gaoding.alert(res.errorInfo);
+            }
+        })
+    });
+</script>
+</body>

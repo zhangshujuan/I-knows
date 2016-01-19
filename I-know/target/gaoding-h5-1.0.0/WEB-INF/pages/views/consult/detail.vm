@@ -1,0 +1,90 @@
+#set($seller = $consultDetailVo.consultVo.seller)
+#set($buyer = $consultDetailVo.consultVo.buyer)
+#set($title="#if($selfId == $seller.id)$buyer.name#else$seller.name#end-消息")
+#set($layout = "layout/commonLayout.vm")
+
+<link rel="stylesheet" type="text/css" href="$staticHttp/styles/message.css">
+
+<div class="imsg-info-list" id="msgList">
+    #foreach($consultMessageVo in $consultDetailVo.consultMessageVoList)
+        #if($selfId == $consultMessageVo.consultMessage.toId)
+            <div class="imsg-item his-imsg">
+                #if($selfId == $seller.id)
+                    <h3>$buyer.mobile  /  $buyer.name</h3>
+                #else
+                    <h3>$seller.name</h3>
+                #end
+                <div class="time">$consultMessageVo.date</div>
+                <div class="chatmsg">
+                    <div class="raw"></div>
+                    <div class="chatmsg-content">$consultMessageVo.consultMessage.content</div>
+                </div>
+            </div>
+        #else
+            <div class="imsg-item my-imsg">
+                <div class="chatmsg">
+                    <div class="raw"></div>
+                    <div class="chatmsg-content">$consultMessageVo.consultMessage.content</div>
+                </div>
+                <h3>我</h3>
+                <div class="time">$consultMessageVo.date</div>
+            </div>
+        #end
+    #end
+</div>
+
+<div id="reply-div" class="msg-form" consult_id="$consultDetailVo.consultVo.consult.id">
+    <div class="msg-revier">
+        <h3>写回复</h3>
+        <textarea id="msgContent" class="textarea-contral"></textarea>
+    </div>
+    <button id="ajaxSubmit" class="btn btn-danger" type="button">发送</button>
+</div>
+
+<script type="text/javascript">
+    Date.prototype.Format = function(fmt){ //author: meizz
+        var o = {
+            "M+" : this.getMonth()+1,                 //月份
+            "d+" : this.getDate(),                    //日
+            "h+" : this.getHours(),                   //小时
+            "m+" : this.getMinutes(),                 //分
+            "s+" : this.getSeconds(),                 //秒
+            "q+" : Math.floor((this.getMonth()+3)/3), //季度
+            "S"  : this.getMilliseconds()             //毫秒
+        };
+        if(/(y+)/.test(fmt))
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+        for(var k in o)
+            if(new RegExp("("+ k +")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        return fmt;
+    }
+    seajs.use(["jquery","gaoding"],function(jQ,gaoding){
+        jQ(window).scrollTop(9999999);
+        var h = jQ(window).height()-jQ("#reply-div").height();
+        var oh = jQ("#msgList").height();
+        if(h>oh){
+            jQ("#msgList").height(h)
+        }
+        jQ("#ajaxSubmit").on("click",function(){
+            var content = jQ('#msgContent').val();
+            var consultId = jQ('#reply-div').attr('consult_id');
+            if(content == "") {
+                return gaoding.alert("发送内容不能为空!")
+            }
+            jQ.ajax({
+                url:"/consult/reply/" + consultId,
+                type:"post",
+                dataType:"json",
+                data:{
+                    content:content
+                },
+                success:function(res){
+                    var strArr = ['<div class="imsg-item my-imsg">','<div class="chatmsg">','<div class="raw"></div>','<div class="chatmsg-content">',content,'</div>','</div>','<h3>我</h3>','<div class="time">',(new Date()).Format("MM-dd  hh:mm"),'</div>','</div>'];
+                    jQ('#msgList').append(strArr.join(""));
+                    jQ('#msgContent').val("");
+                }
+            })
+        })
+    })
+</script>

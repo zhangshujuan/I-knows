@@ -1,0 +1,17 @@
+#set($layout = "layout/commonLayout.vm")
+#set($title = "申请开店")
+
+<link rel="stylesheet" href="$staticHttp/styles/personinfo.css">
+<div class="apply-remark">您正在申请开店，为了让您的申请尽快通过，请详细描述你的简历和你提供的服务。</div>
+<div class="panel textarea">
+    <textarea class="description applySeller" placeholder=" "></textarea>
+</div>
+<div class="nav-fix-bt"><button id="pretendSubmitSuccess" class="btn btn-danger btn100 mt20">提交</button></div>
+
+<script type="text/javascript">seajs.use("$",function($){
+    $("#pretendSubmitSuccess").click(function() {
+       gaoding.alert("提交成功", function() {
+           window.location.href = '/member/me';
+       });
+    });
+})</script>

@@ -1,0 +1,126 @@
+#set($title="赞服务_企业服务采购节")
+#set($layout = "layout/commonLayout.vm")
+<link rel="stylesheet" href="$staticHttp/styles/activity.css">
+
+<style>
+    a {
+        text-decoration: none !important;
+    }
+</style>
+<img src="http://$staticDomain/images/activity-750x547.png" class="activity-header" alt="">
+<div class="clearfix"></div>
+<div class="activity-center">
+    <h3 class="activity-center-header">-   企业服务 好·省·心   -</h3>
+    <div class="activity-center-item">
+        <a href="http://m.zanfuwu.com/fuwu/1001418" target="_blank">
+            <div class="center-item">
+                <div class="center-item-title">三年一个姿势？拒绝乏味年会</div>
+                <div class="center-item-remark">创意年会策划、员工high到爆</div>
+                <button class="btn btn-danger">99元/份</button>
+            </div>
+        </a>
+        <a href="http://m.zanfuwu.com/fuwu/1001419" target="_blank">
+            <div class="center-item">
+                <div class="center-item-title">微信图文撰写、产品文案撰写</div>
+                <div class="center-item-remark">小清新之作、高手指导</div>
+                <button class="btn btn-danger">99元/篇</button>
+            </div>
+        </a>
+        <a href="http://m.zanfuwu.com/fuwu/1001417" target="_blank">
+            <div class="center-item">
+                <div class="center-item-title">高冷与屌丝气质共存的90后写手</div>
+                <div class="center-item-remark">写作手法成熟、文风大胆前卫</div>
+                <button class="btn btn-danger">199元/篇</button>
+            </div>
+        </a>
+        <a href="http://m.zanfuwu.com/fuwu/1000219" target="_blank">
+            <div class="center-item">
+                <div class="center-item-title">资深自媒体人为你撰写文案</div>
+                <div class="center-item-remark">4A公司资深文案 自媒体人</div>
+                <button class="btn btn-danger">499元/篇</button>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="activity-panel">
+    <h3 class="activity-panel-header">特价服务</h3>
+    <a href="http://m.zanfuwu.com/fuwu/1000226" target="_blank">
+        <div class="activity-panel-item">
+            <div class="panel-item-title">我做视频没特别的，就看的人特多</div>
+            <div class="panel-item-contain">病毒传播、创意取胜</div>
+            <div class="price-info"><span class="activity-price">活动价</span><span class="rem">￥</span><span class="price">998</span><span class="dis-price"><line></line><span>￥</span>1500</span></div>
+        </div>
+    </a>
+    <a href="http://m.zanfuwu.com/fuwu/1000430" target="_blank">
+        <div class="activity-panel-item">
+            <div class="panel-item-title">活动现场嗨到爆 宛如歌迷见面会</div>
+            <div class="panel-item-contain">知名手机新品发布会合作主持、活动主持</div>
+            <div class="price-info"><span class="activity-price">活动价</span><span class="rem">￥</span><span class="price">1000</span><span class="dis-price"><line></line><span>￥</span>2000</span></div>
+        </div>
+    </a>
+    <a href="http://m.zanfuwu.com/fuwu/1000208" target="_blank">
+        <div class="activity-panel-item">
+            <div class="panel-item-title">她的小提琴 与郎朗同台演出</div>
+            <div class="panel-item-contain">国家电视台节目录制成员</div>
+            <div class="price-info"><span class="activity-price">活动价</span><span class="rem">￥</span><span class="price">600</span><span class="dis-price"><line></line><span>￥</span>3000</span></div>
+        </div>
+    </a>
+    <a href="http://m.zanfuwu.com/fuwu/1000225" target="_blank">
+        <div class="activity-panel-item">
+            <div class="panel-item-title">她的钢琴一出手 蚂蚁跟着来跳舞</div>
+            <div class="panel-item-contain">国际音乐节金奖得主</div>
+            <div class="price-info"><span class="activity-price">活动价</span><span class="rem">￥</span><span class="price">800</span><span class="dis-price"><line></line><span>￥</span>1000</span></div>
+        </div>
+    </a>
+    <a href="http://m.zanfuwu.com/fuwu/1000215" target="_blank">
+        <div class="activity-panel-item">
+            <div class="panel-item-title">美女主持：明明可以靠脸却靠才艺</div>
+            <div class="panel-item-contain">主持风格多变、语言幽默</div>
+            <div class="price-info"><span class="activity-price">活动价</span><span class="rem">￥</span><span class="price">1000</span><span class="dis-price"><line></line><span>￥</span>1500</span></div>
+        </div>
+    </a>
+    <a href="http://m.zanfuwu.com/fuwu/1000201" target="_blank">
+        <div class="activity-panel-item">
+            <div class="panel-item-title">我出席商业活动演出 来的全绅士</div>
+            <div class="panel-item-contain">钢琴/古筝/萨克斯演奏三选一</div>
+            <div class="price-info"><span class="activity-price">活动价</span><span class="rem">￥</span><span class="price">700</span><span class="dis-price"><line></line><span>￥</span>1000</span></div>
+        </div>
+    </a>
+    <a href="http://m.zanfuwu.com/fuwu/1000223" target="_blank">
+        <div class="activity-panel-item">
+            <div class="panel-item-title">他文案写的辣么好，你造吗？</div>
+            <div class="panel-item-contain">多渠道推广、数据说话</div>
+            <div class="price-info"><span class="activity-price">活动价</span><span class="rem">￥</span><span class="price">2000</span><span class="dis-price"><line></line><span>￥</span>5000</span></div>
+        </div>
+    </a>
+    <a href="http://m.zanfuwu.com/fuwu/1000214" target="_blank">
+        <div class="activity-panel-item">
+            <div class="panel-item-title">找我拍摄肖像的人 都是极具魅力的</div>
+            <div class="panel-item-contain">人物塑造、定制专属风格</div>
+            <div class="price-info"><span class="activity-price">活动价</span><span class="rem">￥</span><span class="price">150</span><span class="dis-price"><line></line><span>￥</span>300</span></div>
+        </div>
+    </a>
+    <a href="http://m.zanfuwu.com/fuwu/1000228" target="_blank">
+        <div class="activity-panel-item">
+            <div class="panel-item-title">她的弦乐四重奏 如临国家大剧院</div>
+            <div class="panel-item-contain">国际音乐节弦乐四重奏大赛金奖</div>
+            <div class="price-info"><span class="activity-price">活动价</span><span class="rem">￥</span><span class="price">3188</span><span class="dis-price"><line></line><span>￥</span>4000</span></div>
+        </div>
+    </a>
+
+    <a href="http://m.zanfuwu.com/fuwu/industry/8" target="_blank"><h3 class="more">更多服务</h3></a>
+</div>
+<a href="http://m.zanfuwu.com">
+    <div class="activity-bottom"><img src="http://$staticDomain/images/activity-logo-105x47.png" alt="">
+        <p class="footer-text" style="font-size: 16px;color: #fff;text-align: center;margin-top: 10px;">本活动最终解释权归赞服务所有</p >
+    </div>
+</a>
+
+## 微信分享
+#if($weixinJSData)
+    #set($shareImage = "http://zanfuwuimg.b0.upaiyun.com/weixin/qiyefuwu_weixin_1217.png")
+    #set($shareTitle = "赞服务_企业服务采购节")
+    #set($shareDesc = "专业服务，一元秒杀...")
+    #renheparse("common/weixinShare.vm")
+#end

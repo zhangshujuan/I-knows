@@ -1,0 +1,75 @@
+#set($layout = "layout/commonLayout.vm")
+#set($title = "我")
+<link rel="stylesheet" href="$staticHttp/styles/my.css">
+
+<div class="panel panel-personInfo cf" style="background-color: transparent;">
+	<div class="panel-item-group">
+        <div class="panel-item" data-href="/member/profile">
+            <div class="fl panel-item-title"><img src="http://$staticDomain/images/gaoding-userinfo-42x42.png" class="title-icon">账号信息
+            </div>
+            <div class="fr panel-right-contain">
+                <i class="iconfont gd-dis">&#xe60c;</i>
+            </div>
+        </div>
+        <div class="panel-item" data-href="/fuwu/collection">
+            <div class="fl panel-item-title"><img src="http://$staticDomain/images/gaoding-mycollect-42x42.png" class="title-icon">我的收藏
+            </div>
+            <div class="fr panel-right-contain">
+                <i class="iconfont gd-dis">&#xe60c;</i>
+            </div>
+        </div>
+        <div class="panel-item" data-href="/consult/list">
+            <div class="fl panel-item-title"><img src="http://$staticDomain/images/wdxx_20151218_42x42.png" class="title-icon">我的消息
+            </div>
+            <div class="fr panel-right-contain">
+                <i class="iconfont gd-dis">&#xe60c;</i>
+            </div>
+        </div>
+        #if($isSeller)
+        <div class="panel-item" data-href="/member/balance">
+            <div class="fl panel-item-title"><img src="http://$staticDomain/images/gaoding- balance-42x42.png" class="title-icon">我的余额
+            </div>
+            <div class="fr panel-right-contain">
+                <i class="iconfont gd-dis">&#xe60c;</i>
+            </div>
+        </div>
+        <div class="panel-item" data-href="/store/my/try">
+            <div class="fl panel-item-title"><img src="http://$staticDomain/images/gapding-shop-42x42.png" class="title-icon">我的店铺
+            </div>
+            <div class="fr panel-right-contain">
+                <i class="iconfont gd-dis">&#xe60c;</i>
+            </div>
+        </div>
+        #end
+	</div>
+    #if(!$isSeller)
+    <div class="panel-hd panel-item" data-href="/member/apply/seller">
+        <div class="fl panel-item-title"><img src="http://$staticDomain/images/gapding-shop-42x42.png" class="title-icon">我要开店
+        </div>
+        <div class="fr panel-right-contain">
+            <i class="iconfont gd-dis">&#xe60c;</i>
+        </div>
+    </div>
+    #end
+    <div class="panel-hd panel-item" style="display: none;">
+        <div class="fl panel-item-title"><img src="http://$staticDomain/images/gaoding-recommend-42x42.png" class="title-icon">推荐好友
+        </div>
+        <div class="fr panel-right-contain">
+            <i class="iconfont gd-dis">&#xe60c;</i>
+        </div>
+    </div>
+
+    <div class="panel-hd panel-item" data-href="/logout">
+        <div class="fl panel-item-title"><img src="http://$staticDomain/images/gaoding-exit-42x42.png" class="title-icon">退出登录
+        </div>
+        <div class="fr panel-right-contain">
+            <i class="iconfont gd-dis">&#xe60c;</i>
+        </div>
+    </div>
+</div>
+
+#set($navIndex = 3)
+#renheparse("common/bottomNav.vm")
+
+<script type="text/javascript">seajs.use("$", function () {
+})</script>

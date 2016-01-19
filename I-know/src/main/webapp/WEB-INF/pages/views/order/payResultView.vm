@@ -1,0 +1,70 @@
+#set($title = "支付")
+#set($layout = "layout/commonLayout.vm")
+
+<link rel="stylesheet" href="$staticHttp/styles/buy.css">
+
+#if($errorInfo)
+<div class="text-center">
+    <div class="iconfont gd-red icon-shibai"></div>
+    <div class="center-tip">$errorInfo</div>
+    <div class="width100 text-center"> <button class="btn btn-danger btn80 radius-lg" data-href="/order/buyer/list">查看订单</button></div>
+</div>
+#elseif($qrCodeUrl)
+<div class="text-center">
+    <div class="center-tip">请在微信下支付,或者扫描下面二维码支付</div>
+    <img src="$qrCodeUrl" class="code" >
+    <div class="width100 text-center"><button class="btn btn-danger btn80 radius-lg" data-href="/order/buyer/list">查看订单</button></div>
+</div>
+#else
+<div id="payRunningDiv" class="text-center">
+    <div class="iconfont gd-red icon-icondoingk"></div>
+	<div class="center-tip">支付中…<br>请耐心等待。</div>
+</div>
+#end
+
+<div id="payFailDiv" class="text-center" style="display: none;">
+	<div class="iconfont gd-red icon-shibai"></div>
+	<div class="center-tip">支付失败！</div>
+   <div class="width100 text-center"> <button class="btn btn-danger btn80 radius-lg" data-href="/order/buyer/list">查看订单</button></div>
+</div>
+
+<div id="paySuccessDiv" class="text-center" style="display: none;">
+    <div class="icon iconfont gd-red gd-success">&#xe60b;</div>
+    <div class="center-tip">预约成功！<br>卖家会尽快与您联系，请耐心等待。</div>
+    <div class="width100 text-center"><button class="btn btn-danger btn80 radius-lg" data-href="/order/buyer/list">查看订单</button></div>
+</div>
+<script type="text/javascript">seajs.use("$",function(){})</script>
+#if($callWeixinPay)
+<script>
+    function onBridgeReady(){
+        WeixinJSBridge.invoke(
+                'getBrandWCPayRequest', {
+                    "appId":"$jsapiMap.get('appId')",
+                    "timeStamp":"$jsapiMap.get('timeStamp')",
+                    "nonceStr":"$jsapiMap.get('nonceStr')",
+                    "package":"$jsapiMap.get('package')",
+                    "signType":"MD5",
+                    "paySign":"$jsapiMap.get('paySign')"
+                },
+                function(res){
+                    $("#payRunningDiv").css("display", "none");
+                    if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                        $("#paySuccessDiv").css("display", "block");
+                    } else {
+                        $("#payFailDiv").css("display", "block");
+                    }
+                }
+        );
+    }
+    if (typeof WeixinJSBridge == "undefined"){
+        if( document.addEventListener ){
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        } else if (document.attachEvent){
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    } else {
+        onBridgeReady();
+    }
+</script>
+#end

@@ -1,0 +1,18 @@
+#set($title="赞服务-我的店铺")
+#set($layout = "layout/commonLayout.vm")
+
+<link rel="stylesheet" href="$staticHttp/styles/buy.css">
+
+<div class="iconfont gd-red icon-fail"></div>
+<div class="center-tip">你还没有店铺哦！</div>
+<button class="btn btn-danger btn80 radius-lg" data-href="/member/apply/seller">我要开店</button>
+
+<script type="text/javascript">
+    seajs.use(["$","gaoding","flexSlider"],function(){
+        $('.flexslider').flexslider({
+            directionNav: false,
+            pauseOnAction: false,
+            animation:"swing"
+        });
+    })
+</script>

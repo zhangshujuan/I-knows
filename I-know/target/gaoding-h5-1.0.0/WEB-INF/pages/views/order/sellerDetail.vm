@@ -1,0 +1,294 @@
+#set($title = "订单列表")
+#set($layout = "layout/commonLayout.vm")
+<link rel="stylesheet" href="$staticHttp/styles/seller-fullpay.css">
+<link rel="stylesheet" type="text/css" href="$staticHttp/styles/index.css">
+#set($seller = $orderDetail.seller)
+#set($orderPhaseDetailList = $orderDetail.orderPhaseDetailVoList)
+#set($currentOrderPhaseDetail = $orderDetail.currentOrderPhaseDetailVo)
+#set($currentPhaseIndex = $orderDetail.fuwuOrder.currentPhase)
+#set($currentPhaseStatus = $currentOrderPhaseDetail.fuwuOrderPhase.status.value)
+<div class="panel">
+    <div class="panel-hd">
+        <div class="panel-title">购买服务</div>
+    </div>
+    <div class="panel-bd">
+        <div class="panel-title text-ellipsis">$orderDetail.fuwuCopy.name</div>
+        <div class="gd-price">
+            <span class="rem">¥</span>
+            <span class="price">$orderDetail.fuwuCopy.price</span>
+            #if($orderDetail.fuwuCopy.priceType.value == 3)
+                <span class="per"> 起</span>
+            #end
+        </div>
+        <div class="gdt-card">
+            <span class="userimgbox"><div class="circle" style="box-sizing: border-box; line-height: 0; width: 1.92rem; height: 1.92rem; border:2px solid #E8E8E8;background-image: url($seller.userface); background-size: contain; background-position: 50% 50%; background-repeat: no-repeat;"></div></span>
+            <p  class="ellipsis"><span class="member-name">$seller.name</span>$seller.title #if($seller.company != "" && $seller.title != "") / #end $seller.company</p>
+        </div>
+    </div>
+</div>
+
+#set($orderDemand = $orderDemandVo.orderDemand)
+<div class="panel">
+    <div class="panel-hd">
+        <div class="panel-title">买家信息</div>
+    </div>
+    <div class="panel-hd panel-item">
+        <div class="panel-item-title">联系人</div>
+        <input class="panel-contain" type="text" value="$orderDemand.name" placeholder="联系人" readonly="true"/>
+    </div>
+    <div class="panel-hd panel-item">
+        <div class="panel-item-title">联系电话</div>
+        <input class="panel-contain" type="text" value="$orderDemand.mobile" placeholder="联系电话" readonly="true"/>
+    </div>
+    <div class="panel-or-show">
+        <div class="panel-hd panel-item">
+            <div class="panel-item-title">地区</div>
+            <input class="panel-contain" type="text" value="$orderDemandVo.addressText" readonly="true" />
+        </div>
+        <div class="panel-hd panel-item">
+            <div class="panel-item-title">从事行业</div>
+            <input class="panel-contain" type="text" value="$orderDemandVo.industryText" readonly="true" />
+        </div>
+        <div class="panel-hd panel-item">
+            <div class="panel-item-title">工作年限</div>
+            <input class="panel-contain" type="text" value="$orderDemand.workAge" readonly="true"/>
+        </div>
+        #if ($orderDemand.company != "")
+            <div class="panel-hd panel-item">
+                <div class="panel-item-title">当前公司</div>
+                <input class="panel-contain" type="text" value="$orderDemand.company" readonly="true"/>
+            </div>
+        #end
+        #if ($orderDemand.title != "")
+            <div class="panel-hd panel-item">
+                <div class="panel-item-title">职业</div>
+                <input class="panel-contain" type="text" value="$orderDemand.title" readonly="true"/>
+            </div>
+        #end
+        #if ($orderDemand.demand != "")
+            <div class="panel-hd panel-item-description">
+                <div class="panel-item-title">需求描述</div>
+                <span class="panel-contain-description">$orderDemand.demand</span>
+            </div>
+        #end
+    </div>
+    <div class="panel-footer">
+        <p class="text-center ft-gray">
+            <i class="iconfont pack-up-down">&#xe601;</i>
+        </p>
+    </div>
+</div>
+
+#if($orderPhaseDetailList.size() > 1)
+<div class="panel">
+    <div class="panel-hd">
+        <div class="panel-title">服务阶段</div>
+    </div>
+    <div class="panel-bd-list">
+        #foreach($orderPhaseDetail in $orderPhaseDetailList)
+            <div class="item">
+                <div class="cf"><span class="fl">$velocityCount.$orderPhaseDetail.fuwuPhaseCopy.name</span><span class="fr">￥$orderPhaseDetail.fuwuOrderPhase.payFee</span></div>
+            </div>
+        #end
+    </div>
+</div>
+#end
+
+<div class="panel">
+    <div class="panel-hd">
+        <div class="panel-title">订单状态</div>
+    </div>
+    <div class="panel-bd order-status">
+        <ul>
+            #foreach($orderProcessRecord in $orderProcessRecordList)
+                #if($orderProcessRecord.orderProcessRecord.sellerContent)
+                    <li #if($velocityCount == 1) class="has-cricle active" #else class="has-cricle" #end>
+                        <p>$orderProcessRecord.orderProcessRecord.sellerContent</p>
+                        <div class="time">$orderProcessRecord.processTime</div>
+                    </li>
+					<li class="no-cricle"></li>
+                #end
+            #end
+            <li class="has-cricle"><p>订单$orderDetail.fuwuOrder.orderNo</p></li>
+			<li class="no-cricle"></li>
+        </ul>
+    </div>
+</div>
+#if($orderDetail.fuwuOrder.status.value == 0)
+<div class="panel fl text-center panel-bottom">
+    <button class="btn btn-whites btn80 border-dis radius-lg" data-gd-modal="{target: '#modifyPricesModel'}">修改服务价格</button>
+</div>
+#elseif($orderDetail.fuwuOrder.status.value == 1)
+<div class="panel fl panel-bottom two-btn">
+    <button class="btn btn-whites btn40 border-dis radius-lg fl sellerRefuseBtn" href="/order/$orderDetail.fuwuOrder.orderNo/seller/refuse" confirm-text="请确认您要拒绝此订单，无理由拒绝订单可能会影响到您在平台的诚信度。">拒绝</button>
+    <button class="btn btn-whites btn40 border-red radius-lg fl sellerAcceptBtn" href="/order/$orderDetail.fuwuOrder.orderNo/seller/accept" confirm-text="请确认您要接受此订单，确认后表示您同意为买家提供此服务。">接受</button>
+</div>
+#elseif($orderDetail.fuwuOrder.status.value == 2)
+    #set($currentPhase = $orderDetail.currentOrderPhaseDetailVo.fuwuOrderPhase)
+    #if($currentPhase.status.value == 0)
+    <div class="panel fl text-center panel-bottom">
+        <button class="btn btn-whites btn80 border-dis radius-lg" data-gd-modal="{target: '#modifyPriceModel'}">修改#if($currentPhaseIndex > 0)阶段$currentPhaseIndex#end##
+价格</button>
+    </div>
+    #elseif($currentPhase.status.value == 1)
+    <div class="panel fl text-center panel-bottom">
+        #if($currentPhase.orderIndex > 0)
+            <button class="btn border-red btn80  btn-whites font-red radius-lg completeFuwuBtn" href="/order/$orderDetail.fuwuOrder.orderNo/seller/complete" confirm-text="请确认您已按照服务描述完成阶段$currentPhase.orderIndex服务，否则可能导致买家投诉。">确认完成阶段$currentPhase.orderIndex服务</button>
+        #else
+            <button class="btn border-red btn80  btn-whites font-red radius-lg completeFuwuBtn" href="/order/$orderDetail.fuwuOrder.orderNo/seller/complete" confirm-text="请确认您已按照服务描述完成全部服务，否则可能导致买家投诉。">确认完成服务</button>
+        #end
+    </div>
+    #elseif($currentPhase.status.value == 2)
+    <div class="panel fl text-center panel-bottom">
+        <button class="btn btn-whites btn80 border-dis radius-lg" #if($currentPhaseIndex > 1) data-gd-modal="{target: '#modifyPriceModel'}" #else data-gd-modal="{target: '#modifyPricesModel'}" #end >修改#if($currentPhaseIndex > 0)阶段$currentPhaseIndex#end##
+价格</button>
+    </div>
+    #end
+#elseif($orderDetail.fuwuOrder.status.value == 3)
+<div class="panel-bottom text-center">
+    <p class="ft-bs fs34r">等待买家评论</p>
+</div>
+#elseif($orderDetail.fuwuOrder.status.value == 4)
+#else
+<div class="panel-bottom text-center">
+    <p class="ft-bs fs34">订单已关闭</p>
+</div>
+#end
+
+#if($orderDetail.fuwuOrder.status.value == 4)
+<div class="panel fl margin-bottom">
+    <div class="panel-hd">
+        <div class="panel-title">买家评价</div>
+    </div>
+    <div class="panel-bd panel-bd-appraises panel-bd-list">
+        #foreach($comment in $commentList)
+            <div class="media">
+                <div class="media-body">
+                    <div class="media-heading">$orderDemand.name <span>$orderDemand.company #if($orderDemand.company != "" && $orderDemand.title != "") / #end $orderDemand.title</span></div>
+                    <p>$comment.content</p>
+                    <p class="cf appra-stars">
+						<span class="fl">评价
+                            #if($comment.score > 0)
+                                #foreach($sc in [1..$comment.score])
+                                    <em class="iconfont gd-red icon-xingyetubiao12"></em>
+                                #end
+                            #end
+						</span>
+                        <time class="fr time">$comment.sendTime</time>
+                    </p>
+                </div>
+            </div>
+        #end
+    </div>
+</div>
+#end
+
+<div class="gd-modal gd-modal-confirm" tabindex="-1" id="modifyPriceModel">
+    <div class="gd-modal-dialog">
+        <div class="gd-modal-bd">
+            <div class="gd-modal-remark">
+                <span class="font-red">$currentOrderPhaseDetail.fuwuPhaseCopy.name价格</span>
+                <span>修改为</span>
+            </div>
+            <div class="ga-modal-edit">
+                <span class="money">￥</span>
+                <input type="text" id="newPrice" class="gd-modal-input sum" value="$currentOrderPhaseDetail.fuwuOrderPhase.payFee" placeholder="$currentOrderPhaseDetail.fuwuOrderPhase.payFee"/>
+            </div>
+        </div>
+        <div class="gd-modal-footer">
+            <span class="gd-modal-btn" data-gd-modal-cancel="">取消</span>
+            <span class="gd-modal-btn" data-gd-modal-confirm="">确定</span>
+        </div>
+    </div>
+</div>
+<div class="gd-modal gd-modal-confirm" tabindex="-1" id="modifyPricesModel">
+    <div class="gd-modal-dialog">
+    <div class="gd-modal-hd font-red gd-modal-hd-title">修改价格</div>
+        <div class="gd-modal-bd cf modal-lines-contains">
+            #foreach($orderPhaseDetail in $orderPhaseDetailList)
+				<div class="modal-line fl">
+                    <div class="modal-line-title fl">阶段$velocityCount</div>
+                    <div class="ga-modal-edit">
+                        #if ($orderPhaseDetail.fuwuOrderPhase.status.value < 3)
+                            <span class="money">￥</span>
+                            <input type="text" class="newPrice gd-modal-input sum font-red" value="$orderPhaseDetail.fuwuOrderPhase.payFee" />
+                        #else
+                            <span class="money">￥</span>
+                            <input type="text" disabled class="newPrice gd-modal-input sum" value="$orderPhaseDetail.fuwuOrderPhase.payFee" />
+                        #end
+                    </div>
+                </div>
+            #end
+        </div>
+        <div class="gd-modal-footer">
+            <span class="gd-modal-btn" data-gd-modal-cancel="">取消</span>
+            <span class="gd-modal-btn" data-gd-modal-confirm="">确定</span>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    #if($showAcceptMsg)
+        gaoding.alert('请第一时间主动于卖家联系');
+    #end
+    seajs.use(["$", "modal"],function($,modal){
+        $("#modifyPriceModel").on("confirm.modal.amui",function() {
+            var newPrice = $("#newPrice").val();
+            $.post("/order/$orderDetail.fuwuOrder.orderNo/change/price", { "newPrice" : newPrice}, function(data) {
+                var res = $.parseJSON(data);
+                if (res.errorCode == 0) {
+                    gaoding.alert("修改价格成功", function() {
+                        window.location.href="/order/$orderDetail.fuwuOrder.orderNo/detail";
+                    });
+                } else {
+                    gaoding.alert(res.errorInfo);
+                }
+            });
+        });
+        $("#modifyPricesModel").on("confirm.modal.amui",function() {
+            var newPriceList = new Array();
+            $(".newPrice").each(function() {
+                newPriceList.push($(this).val());
+            });
+            $.post("/order/$orderDetail.fuwuOrder.orderNo/change/prices", { "newPrice" : newPriceList.join(",")}, function(data) {
+                var res = $.parseJSON(data);
+                if (res.errorCode == 0) {
+                    gaoding.alert("修改价格成功", function() {
+                        window.location.href="/order/$orderDetail.fuwuOrder.orderNo/detail";
+                    });
+                } else {
+                    gaoding.alert(res.errorInfo);
+                }
+            });
+        });
+        $(".sellerRefuseBtn").click(function() {
+            if (confirm($(this).attr("confirm-text"))) {
+                location.href = $(this).attr("href");
+            }
+        });
+        $(".sellerAcceptBtn").click(function() {
+            if (confirm($(this).attr("confirm-text"))) {
+                location.href = $(this).attr("href");
+            }
+        });
+        $(".completeFuwuBtn").click(function() {
+            var text = $(this).attr('confirm-text');
+            if (confirm(text)) {
+                var url = $(this).attr('href');
+                location.href = url;
+            }
+        });
+        $(".panel-footer").click(function(){
+            var panelthis = $(this);
+            if(panelthis.hasClass("unfold")){
+                $(".panel-or-show").slideUp("3000");
+                $(".panel-footer").removeClass("unfold");
+                panelthis.find(".text-center").html('<i class="iconfont pack-up-down">&#xe601;</i>');
+            } else {
+                $(".panel-or-show").slideDown("3000");
+                $(".panel-footer").addClass("unfold");
+                panelthis.find(".text-center").html('<i class="iconfont pack-up-down">&#xe600;</i>');
+            }
+        });
+    });
+</script>

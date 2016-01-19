@@ -1,0 +1,21 @@
+#set($layout = "layout/commonLayout.vm")
+#set($title = "余额明细")
+
+<link rel="stylesheet" href="$staticHttp/styles/personinfo.css">
+
+<div class="panel panel-touchBalance">
+#foreach($tradeInfoVo in $tradeInfoVoList)
+    #set($tradeInfo = $tradeInfoVo.memberTradeInfo)
+    <div class="panel-hd panel-item">
+        <div class="fl panel-touchBalance-left">
+            <div class="touchBalance-title">$tradeInfo.content</div>
+            <div class="touchBalance-time">$tradeInfoVo.dateTime</div>
+        </div>
+        <div class="fr">
+            <span class="panel-touchBalance-right">#if($tradeInfo.balance > 0)+#end$tradeInfo.balance</span>
+        </div>
+    </div>
+#end
+</div>
+
+<script type="text/javascript">seajs.use("$",function(){})</script>

@@ -1,0 +1,25 @@
+#!/bin/bash
+# init script for `mvn tomcat7:run`
+
+JAVA_HOME="/usr/local/jdk1.8.0_60"
+M2_HOME="/usr/local/maven/apache-maven-3.3.1"
+
+LOG_FILE="logs/catalina.out"
+PID_FILE="logs/pid"
+
+JAVA="$JAVA_HOME/bin/java"
+MAVEN="$M2_HOME/bin/mvn"
+
+BASE_DIR="$(cd `dirname $0` && cd .. && pwd)"
+LOG_FILE="$BASE_DIR/$LOG_FILE"
+PID_FILE="$BASE_DIR/$PID_FILE"
+
+if [ -f $PID_FILE ]
+then
+    echo "already started (pid: `cat $PID_FILE`)"
+    exit 1
+fi
+
+nohup $MAVEN tomcat7:run > $LOG_FILE 2>&1 &
+echo -n $! > $PID_FILE
+echo "start success"

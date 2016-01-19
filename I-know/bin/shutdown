@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export CATALINA_BASE="$PWD"
+export CATALINA_HOME="/usr/renhenet/tomcat7"
+
+$CATALINA_HOME/bin/shutdown.sh

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+export JAVA_HOME=/usr/renhenet/java8
+export CATALINA_BASE="$PWD"
+export CATALINA_HOME="/usr/renhenet/tomcat7"
+export JAVA_OPTS="-server -Xmx4000m -Xms2000m -Xmn1g -XX:PermSize=256m -XX:MaxPermSize=512m"
+
+## add tomcat run conf
+rm -rf conf
+mkdir conf
+cp -R "$CATALINA_BASE"/binconf/* conf/
+
+## 启动命令
+$CATALINA_HOME/bin/startup.sh

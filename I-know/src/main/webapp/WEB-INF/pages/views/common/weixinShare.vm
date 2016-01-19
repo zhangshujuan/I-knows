@@ -1,0 +1,81 @@
+<script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script>
+    seajs.use('wx',function(wx){
+        wx.config({
+            debug: false,
+            appId: '$weixinJSData.appId',
+            timestamp: $weixinJSData.timestamp,
+            nonceStr: '$weixinJSData.nonceStr',
+            signature: '$weixinJSData.signature',
+            jsApiList: [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo'
+            ]
+        });
+        wx.ready(function () {
+            wx.onMenuShareAppMessage({
+                title: '$shareTitle',
+                desc: '$shareDesc',
+                link: '$weixinJSData.shareUrl',
+                imgUrl: '$shareImage',
+                trigger: function (res) {
+                },
+                success: function (res) {
+                },
+                cancel: function (res) {
+                },
+                fail: function (res) {
+                    // alert(JSON.stringify(res));
+                }
+            });
+            wx.onMenuShareTimeline({
+                title: '$shareTitle',
+                link: '$weixinJSData.shareUrl',
+                imgUrl: '$shareImage',
+                trigger: function (res) {
+                },
+                success: function (res) {
+                },
+                cancel: function (res) {
+                },
+                fail: function (res) {
+                }
+            });
+            wx.onMenuShareQQ({
+                title: '$shareTitle',
+                desc: '$shareDesc',
+                link: '$weixinJSData.shareUrl',
+                imgUrl: '$shareImage',
+                trigger: function (res) {
+                },
+                complete: function (res) {
+                },
+                success: function (res) {
+                },
+                cancel: function (res) {
+                },
+                fail: function (res) {
+                }
+            });
+            wx.onMenuShareWeibo({
+                title: '$shareTitle',
+                desc: '$shareDesc',
+                link: '$weixinJSData.shareUrl',
+                imgUrl: '$shareImage',
+                trigger: function (res) {
+                },
+                complete: function (res) {
+                },
+                success: function (res) {
+                },
+                cancel: function (res) {
+                },
+                fail: function (res) {
+                }
+            });
+        });
+    })
+
+</script>

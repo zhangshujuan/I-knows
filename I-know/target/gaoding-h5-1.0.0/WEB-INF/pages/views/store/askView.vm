@@ -1,0 +1,88 @@
+#set($layout = "layout/commonLayout.vm")
+#set($title = "咨询")
+
+<link rel="stylesheet" type="text/css" href="$staticHttp/styles/zfw-detial.css">
+<link rel="stylesheet" href="$staticHttp/styles/personinfo.css" xmlns="http://www.w3.org/1999/html">
+<link rel="stylesheet" href="$staticHttp/styles/popup.css">
+
+<div class="gd-modal gd-modal-confirm" tabindex="-1" id="myConfirm">
+    <div class="gd-modal-dialog">
+        <div class="gd-modal-hd">
+            <div class="iconfont icon-close gd-modal-btn"  data-gd-modal-cancel=""></div>
+        </div>
+        <div class="gd-modal-bd">
+            <div class="font-red">关注赞服务公众号<br>随时获取订单最新状态</div>
+            <img src="${imageHttp}/images/code-img-317x317-2015-12-21.png" alt="" style="width: 9.6rem; height: 9.6rem;">
+            <p class="text-center">长按图片,识别二维码</p>
+        </div>
+    </div>
+</div>
+
+#if($fuwu)
+<div class="panel mt20" data-href="/fuwu/$fuwu.id/detail">
+    <div class="panel-bd">
+        <div class="panel-title text-ellipsis">$fuwu.name</div>
+        <div class="gd-price mt20">
+            <span class="rem">¥</span>
+            <span class="price">$fuwu.price</span>
+            #if($fuwu.priceType.value == 3)
+                <span class="per"> 起</span>
+            #end
+        </div>
+        <div class="gdt-card">
+            <span class="userimgbox"><div class="circle" style="box-sizing: border-box; line-height: 0; width: 1.92rem; height: 1.92rem; border:2px solid #E8E8E8;background-image: url($seller.userface); background-size: contain; background-position: 50% 50%; background-repeat: no-repeat;"></div></span>
+            <p class="ellipsis"><span class="member-name">$seller.name</span>$seller.title #if($seller.company != "" && $seller.title != "") / #end $seller.company</p>
+        </div>
+    </div>
+</div>
+#else
+<div class="media media-card border-bottom mt20" data-href="/store/$seller.id">
+    <div class="media-left">
+        <img src="$seller.userface" class="userimg circle">
+    </div>
+    <div class="media-body">
+        <div class="media-heading">$seller.name</div>
+        <p class="mr40 text-ellipsis mt10">$seller.title #if($seller.company != "" && $seller.title != "") / #end $seller.company</p>
+    </div>
+    <div class="media-left">
+        <span class="iconfont icon-right">&#xe60c;</span>
+    </div>
+</div>
+#end
+
+<a href="tel://4000697055">
+    <div class="panel panel-item mt20">
+        <div class="fl panel-left">咨询热线</div>
+        <div class="fl panel-center"><span>4000697055</span></div>
+        <div class="fr panel-right">
+            <i class="iconfont gd-dis">&#xe60c;</i>
+        </div>
+    </div>
+</a>
+
+<form id="messageForm" class="panel-item-bankInfo" data-remote="true" data-type="json" action="/seller/$sellerId/ask" method="post">
+    <div class="panel-header">留言</div>
+	<div class="panel textarea">
+        <textarea name="content" class="leave-message" placeholder="请输入您想咨询的问题,我们会尽快跟您联系。"></textarea>
+    </div>
+	<div class="nav-fix-bt"> <button class="btn btn-danger btn100">提交</button></div>   
+</form>
+
+<script type="text/javascript">
+    seajs.use(["jquery", "rails"],function(jQ){
+        jQ("#messageForm").on("ajax:success",function(e,res) {
+            if (res.errorCode == 0) {
+                gaoding.alert("咨询提交成功，我们会尽快与您联系！", function() {
+                    if(!res.ref) {
+                        // 弹出关注微信二维码的提示框
+                        $("#myConfirm").modal("open")
+                    } else {
+                        history.back();
+                    }
+                });
+            } else {
+                gaoding.alert(res.errorInfo);
+            }
+        })
+    });
+</script>

@@ -1,0 +1,178 @@
+#set($title = "购买")
+#set($layout = "layout/commonLayout.vm")
+
+<link rel="stylesheet" href="$staticHttp/styles/buy.css">
+
+<div class="panel mt20">
+    <div class="panel-hd">
+        <div class="panel-title">购买服务</div>
+    </div>
+    <div class="panel-bd">
+        <div class="panel-title text-ellipsis">$fuwu.name</div>
+        <div class="gd-price mt20">
+            <span class="rem">¥</span>
+            <span class="price">$fuwu.price</span>
+            #if($fuwu.priceType.value == 3)
+                <span class="per">/ 次 起</span>
+            #else
+                <span class="per">/ 次</span>
+            #end
+        </div>
+        <div class="gdt-card">
+            <span class="userimgbox"><div class="circle" style="box-sizing: border-box; line-height: 0; width: 1.92rem; height: 1.92rem; border:2px solid #E8E8E8;background-image: url($seller.userface); background-size: contain; background-position: 50% 50%; background-repeat: no-repeat;"></div></span>
+            <p class="ellipsis"><span class="member-name">$seller.name</span>$seller.title #if($seller.company != "" && $seller.title != "") / #end $seller.company</p>
+        </div>
+    </div>
+</div>
+
+<form id="fillForm" data-remote="true" data-type="json" action="/order/$orderNo/generate" method="post">
+<div class="panel mt20">
+    <div class="panel-hd">
+        <div class="panel-title">需求描述</div>
+    </div>
+    <div class="panel-bd">
+        <textarea name="demand" class="description demand" placeholder=" "></textarea>
+    </div>
+</div>
+
+<div class="panel mt20" q-ctrl="loginCtr">
+    <div class="panel-hd">
+        <div class="panel-title">支付阶段</div>
+    </div>
+    <ul class="gdm-list pay-status fs28">
+        #if($fuwu.priceType.value == 0)
+            <li class="cf js-pay js-pay-1">
+                <div class="s1 fl text-right">
+                #if($fuwuPhaseList.size() > 1)
+                    <i class="iconfont ft-red icon-nckradio"></i>
+                    <input type="radio" name="allpay" value="true" style="display:none;">
+                #else
+                    <i class="iconfont ft-red icon-radio"></i>
+                    <input type="radio" name="allpay" value="true" style="display:none;" checked>
+                #end
+                </div>
+                <div class="s2 fl"><span class="ft-bs">全额支付</span></div>
+                <div class="s3 fl"><em class="ft-bs">￥$fuwu.price</em></div>
+            </li>
+
+            #if($fuwuPhaseList.size() > 1)
+                <li class="cf js-pay js-pay-2">
+                    <div class="s1 fl text-right">
+                        <i class="iconfont ft-red icon-radio"></i>
+                        <input type="radio" name="allpay" value="false" style="display:none;">
+                    </div>
+                    <div class="s2 fl"><span class="ft-bs">分阶段支付</span></div>
+                    <div class="s3 fl"><em class="ft-bs">￥$fuwuPhaseList.get(0).price</em></div>
+                </li>
+                #foreach($fuwuPhase in $fuwuPhaseList)
+                    <li class="cf js-pay js-pay-2">
+                        <div class="s1 fl"></div>
+                        #if($velocityCount == 1)
+                        <div class="s2 fl cf">
+                            <span class="fl">
+                                <i class="iconfont ft-red icon-radio"></i>
+                                <input type="radio" name="step1" style="display:none;">
+                            </span>
+                            <span class="ft-bs fl ellipsis">$velocityCount.$fuwuPhase.name</span>
+                        </div>
+                        <div class="s3 fl"><em class="ft-bs">￥$fuwuPhase.price</em></div>
+                        #else
+                            <div class="s2 fl"><div class="ft-b5 ml46 ellipsis fs30">$velocityCount.$fuwuPhase.name</div></div>
+                            #if($fuwuPhase.price > 0)
+                                <div class="s3 fl"><em class="ft-b5">￥$fuwuPhase.price</em></div>
+                            #end
+                        #end
+                    </li>
+                #end
+            #end
+        ## 其他定价类型不显示全额支付
+        #else
+            #foreach($fuwuPhase in $fuwuPhaseList)
+                <li class="cf js-pay js-pay-2">
+                    #if($velocityCount == 1)
+                        <div class="s1 fl text-right">
+                            <i class="iconfont ft-red icon-radio"></i>
+                        </div>
+                        <div class="s2 fl">
+                            <span class="ft-bs fl ellipsis" style="width: 100%;">$velocityCount.$fuwuPhase.name</span>
+                        </div>
+                        <div class="s3 fl"><em class="ft-bs">￥$fuwuPhase.price</em></div>
+                    #else
+                        <div class="s1 fl"></div>
+                        <div class="s2 fl"><div class="ft-b5 ellipsis fs30" style="width: 100%;">$velocityCount.$fuwuPhase.name</div></div>
+                        #if($fuwuPhase.price > 0)
+                            <div class="s3 fl"><em class="ft-b5">￥$fuwuPhase.price</em></div>
+                        #end
+                    #end
+                </li>
+            #end
+        #end
+    </ul>
+</div>
+<div>
+    <div class="buy-bottom bottom-pay">支付保障</div>
+    <div class="bottom-remark">本次交易款项先支付到赞服务平台，<br>在您确认服务完成后才会支付给卖家。<br>如有疑问，请联系客服：4000697055 </div>
+    <div class="nav-fix-bt"><button class="btn btn-danger btn100" type="submit" q-onclick="checkCode" >支付费用到平台</button></div>
+</div>
+</form>
+<script>
+    seajs.use(["jquery", "rails"],function(Q){
+        Q("#fillForm").on("ajax:success",function(e,data) {
+            if(data.errorCode == 0) {
+                Q.ajax({
+                    url : "/order/weixinpay?orderNo=$orderNo",
+                    type : "POST",
+                    beforeSend : function() {
+                        gaoding.loading(1).show();
+                    },
+                    success : function(result) {
+                        var res = $.parseJSON(result);
+                        if (res.errorCode == 0) {
+                            var ref = res.ref;
+                            if (ref.prepayId) {
+                                location.href = "/order/weixinpay?orderNo=$orderNo&prepayId=" + ref.prepayId;
+                            } else if (ref.codeUrl) {
+                                location.href = "/order/weixinpay?orderNo=$orderNo&codeUrl=" + ref.codeUrl;
+                            }
+                        }
+                        gaoding.loading(1).hide();
+                    }
+                });
+            } else if (data.errorCode == 40305) {
+                window.location.href = "/order/$orderNo/detail";
+            } else if (data.errorCode == 40307) {
+                gaoding.alert(data.errorInfo, function() {
+                    window.location.href = "/order/$orderNo/detail";
+                });
+            } else {
+                gaoding.alert(data.errorInfo);
+            }
+        })
+
+        var checkFn = function(_this,cls){
+            Q(cls).find('.iconfont').removeClass('icon-radio');
+            Q(cls).find('.iconfont').addClass('icon-nckradio');
+            Q(cls).find('input[type="radio"]').removeAttr("checked");
+            Q(_this).find('.iconfont').removeClass('icon-nckradio');
+            Q(_this).find('.iconfont').addClass('icon-radio');
+            Q(_this).find('input[type="radio"]').attr("checked",true);
+        }
+        Q('.js-pay-1').click(function(e){
+            checkFn('.js-pay-1','.js-pay-2');
+        })
+        Q('.js-pay-2').click(function(e){
+            checkFn('.js-pay-2','.js-pay-1');
+        })
+        Q('.js-slide').click(function(e){
+            if(!Q('.tran-slide').hasClass('up')){
+                Q('.tran-slide').addClass("up");
+                Q(this).find('.iconfont').addClass("icon-icon08").removeClass('icon-shouqi')
+            }else{
+                Q('.tran-slide').removeClass('up');
+                Q(this).find('.iconfont').addClass("icon-shouqi").removeClass('icon-icon08')
+            }
+        });
+    });
+
+
+</script>

@@ -1,0 +1,238 @@
+#set($title="${fuwuDetailVo.fuwu.name}-赞服务")
+#set($page_description="#if($fuwuDetailVo.fuwu.description.length() > 70)$fuwuDetailVo.fuwu.description.substring(0,70)#else${fuwuDetailVo.fuwu.description}#end")
+#set($layout = "layout/commonLayout.vm")
+<link rel="stylesheet" type="text/css" href="$staticHttp/styles/zfw-detial.css">
+<div class="detail-hd-panel">
+    <div class="panel-title">$fuwuDetailVo.fuwu.name</div>
+	<div class="price-info mt20">
+        #if($fuwuDetailVo.fuwuActivity)
+            <span class="activity-price">活动价</span>
+            <span class="rem">￥</span><span class="price">$fuwuDetailVo.fuwu.price</span>
+            #if($fuwuDetailVo.fuwu.priceType.value == 3)<span class="per"> 起</span>#end
+
+            <span class="dis-price"><line></line><span>￥</span>$fuwuDetailVo.fuwuActivity.originalPrice
+            #if($fuwuDetailVo.fuwu.priceType.value == 3)<span class="per"> 起</span>#end
+            </span>
+        #else
+            #if($fuwuDetailVo.fuwu.priceType.value == 0)
+                <span class="rem">￥</span><span class="price">$fuwuDetailVo.fuwu.price</span>
+            #elseif($fuwuDetailVo.fuwu.priceType.value == 3)
+                <span class="rem">￥</span><span class="price">$fuwuDetailVo.fuwu.priceStart</span>
+                <span class="per"> 起</span>
+            #else
+                <span class="rem">￥</span><span class="price">$fuwuDetailVo.fuwu.priceStart ~ $fuwuDetailVo.fuwu.priceEnd</span>
+            #end
+        #end
+	</div>
+    <div class="detail-hd-type mt20">
+		<div class="detail-type-info"><span class="fl">服务区域：</span><span class="detail-type-info-fr">$!fuwuDetailVo.addressName</span></div>
+		<div class="detail-type-info"><span class="fl">可联系时间：</span><span class="detail-type-info-fr">$fuwuDetailVo.fuwu.fuwuTime.getName()</span></div>
+    </div>
+    <div class="detail-hd-num mt30">
+        <em>$fuwuDetailVo.favoriteCount</em> 收藏 <i></i><em>$fuwuDetailVo.buyCount</em> 购买
+    </div>
+</div>
+## 活动banner
+#if($fuwuDetailVo.fuwuActivity)
+<a href="http://s1.zanfuwu.com/static/qiyefuwu.html"><img src="http://$staticDomain/images/banner-img-750x78.png" class="baner-img"/></a>
+#end
+
+<div class="media media-card border-bottom" data-href="/store/$fuwuDetailVo.member.id">
+    <div class="media-left">
+        <img src="$fuwuDetailVo.member.userface" class="userimg circle">
+    </div>
+    <div class="media-body">
+        <div class="media-heading">$fuwuDetailVo.member.name</div>
+        <p class="mr40 text-ellipsis mt10"> $fuwuDetailVo.member.title #if($fuwuDetailVo.member.company != "" && $fuwuDetailVo.member.title != "") / #end $fuwuDetailVo.member.company</p>
+    </div>
+	<div class="media-left">
+        <span class="iconfont icon-right">&#xe60c;</span>
+    </div>
+</div>
+<div class="panel mt20">
+    <div class="panel-hd">
+        <div class="panel-title">服务介绍</div>
+    </div>
+    <div class="panel-bd">
+        <p class="fuwu-description">
+            $vmUtil.line2BR($fuwuDetailVo.fuwu.description)
+        </p>
+    </div>
+</div>
+
+#if($fuwuDetailVo.fuwuPhaseList.size() > 1)
+<div class="panel mt20">
+    <div class="panel-hd">
+        <div class="panel-title">服务阶段</div>
+    </div>
+    <div class="panel-bd panel-bd-list">
+        #if($fuwuDetailVo.fuwuPhaseList.size() > 1)
+            #foreach($fuwuPhase in $fuwuDetailVo.fuwuPhaseList)
+                #if($velocityCount!=1)<hr>#end
+                <div class="item">
+                    <div class="cf"><span class="fl">#if($fuwuDetailVo.fuwuPhaseList.size() > 1)${fuwuPhase.orderIndex} .#end $fuwuPhase.name</span>#if($fuwuPhase.price > 0)<span class="fr">￥$fuwuPhase.price</span>#end</div>
+                    <p>$vmUtil.line2BR($fuwuPhase.description)</p>
+                </div>
+            #end
+        #else
+            <div class="item">
+                <div class="cf"><span class="fl">本服务不支持分阶段。</span></div>
+            </div>
+        #end
+    </div>
+</div>
+#end
+
+#if($fuwuDetailVo.fuwuCaseList.size() > 0)
+<div class="panel mt20">
+    <div class="panel-hd">
+        <div class="panel-title">案例</div>
+    </div>
+    <div class="panel-bd panel-bd-list">
+        #foreach($case in $fuwuDetailVo.fuwuCaseList)
+			#if($velocityCount!=1)<hr>#end
+            <div class="item" data-href="$case.link">
+                <div class="case-title ellipsis">$case.title</div>
+                <span class="iconfont icon-right">&#xe60c;</span>
+            </div>
+        #end
+    </div>
+</div>
+#end
+#if($fuwuDetailVo.commentCount > 0)
+<div class="panel mt20">
+    <div class="panel-hd">
+        <div class="panel-title">评价($fuwuDetailVo.commentCount)</div>
+    </div>
+    <div class="panel-bd panel-bd-appraises panel-bd-list">
+        #foreach($commentVo in $fuwuDetailVo.commentVoList)
+			#if($velocityCount!=1)<hr>#end
+            <div class="media">
+                <div class="media-left">
+                    <img src="$commentVo.member.userface" class="userimg circle">
+                </div>
+                <div class="media-body">
+                    <div class="media-heading">$commentVo.member.name<span>$commentVo.member.company #if($commentVo.member.company != "" && $commentVo.member.title != "") / #end $commentVo.member.title</span></div>
+                    <p>$commentVo.comment.content</p>
+                    <p class="cf appra-stars">
+					<span class="fl">评价
+                        #foreach($sc in [1..$commentVo.comment.score])
+                            <em class="iconfont gd-red">&#xe633;</em>
+                        #end
+					</span>
+                        <time class="fr time">$commentVo.date</time>
+                    </p>
+
+                </div>
+            </div>
+        #end
+    </div>
+    #if($fuwuDetailVo.commentCount > 3)
+        ## <div class="panel-more text-center">更多评价</div>
+    #end
+</div>
+#end
+<div class="panel-group mt20" style="display: none;">
+    <div class="panel panel-detail-intro">
+        <div class="panel-hd">
+            <div class="panel-title">服务推荐</div>
+        </div>
+        #foreach($recommendFuwu in $recommendFuwuList)
+            #if($velocityCount!=1)<hr>#end
+            <div class="panel-bd fuwu-style" data-href="/fuwu/$recommendFuwu.id/detail">
+                <div class="panel-title">$recommendFuwu.name</div>
+                <div class="gd-price">
+                    <span class="rem">¥</span>
+                    <span class="price">$recommendFuwu.price</span>
+                    <span class="per">/ 次</span>
+                </div>
+                <!--<div data-href="/fuwu/$recommendFuwu.id/detail" class="btn-right"><button class="btn btn-danger round btw140">详细</button></div>-->
+            </div>
+        #end
+    </div>
+</div>
+
+<div class="text-center">
+    <br>
+    <p><span class="fs-bs callback-index" data-href="/index">返回赞服务首页</span></p>
+    <br>
+    <p class="fs-bs">本店铺由赞服务提供技术支持</p>
+</div>
+
+<div class="nav-fix-bt detail-fix">
+    #if($fuwuDetailVo.fuwu.status.value == -1)
+	    <div class="sold-out-tip">服务已经下架啦~</div>
+    #elseif($fuwuDetailVo.fuwu.status.value == 0 || $fuwuDetailVo.fuwu.status.value == 2)
+        <div class="sold-out-tip">服务还未审核通过</div>
+    #end
+    <div class="item">
+        <div class="itemlink" data-href="/seller/$fuwuDetailVo.member.id/ask?fuwuId=$fuwuDetailVo.fuwu.id">
+            <i class="iconfont icon-xingyetubiao07"></i>
+            <br><span class="txt">咨询</span>
+        </div>
+    </div>
+    <div class="item">
+        <div class="itemlink" data-href="/store/$fuwuDetailVo.fuwu.sellerId">
+            <i class="iconfont icon-xingyetubiao08"></i>
+            <br><span class="txt">店铺</span>
+        </div>
+    </div>
+    <div class="item">
+        <div id="fuwuCollectBtn" class="itemlink collect">
+            #if($hasCollect)
+                <i class="iconfont icon-shoucangyishoucang font-red"></i>
+                <br><span class="txt">已收藏</span>
+            #else
+                <i class="iconfont icon-shoucangweishoucang"></i>
+                <br><span class="txt">收藏</span>
+            #end
+        </div>
+    </div>
+    <div class="item buy">
+        #if($fuwuDetailVo.fuwu.status.value == -1)
+            <div class="itemlink unable-buy">购买</div>
+        #elseif($fuwuDetailVo.fuwu.status.value == 0)
+            <div class="itemlink unable-buy">购买</div>
+        #elseif($fuwuDetailVo.fuwu.status.value == 2)
+            <div class="itemlink unable-buy">购买</div>
+        #else
+            <div class="itemlink" data-href="/order/fuwu/$fuwuDetailVo.fuwu.id/buy">购买</div>
+        #end
+    </div>
+</div>
+
+## 微信分享
+#if($weixinJSData)
+    #set($shareImage = "$fuwuDetailVo.member.userface")
+    #set($shareTitle = "$fuwuDetailVo.fuwu.name")
+    #set($shareDesc = "$vmUtil.weixinDesc($fuwuDetailVo.fuwu.description)")
+    #renheparse("common/weixinShare.vm")
+#end
+
+<script type="text/javascript">
+seajs.use(["jquery"],function($){
+    $('#fuwuCollectBtn').click(function(){
+		var count = $(".detail-hd-num em:eq(0)").text();
+        $.post("/fuwu/$fuwuDetailVo.fuwu.id/collect", function(data) {
+            var res = $.parseJSON(data);
+            if (res.errorCode == 0) {
+                var i = $("#fuwuCollectBtn").find("i");
+                var span = $("#fuwuCollectBtn").find("span");
+                if(i.hasClass("icon-shoucangweishoucang")){
+                    i.removeClass("icon-shoucangweishoucang").addClass("icon-shoucangyishoucang font-red");
+                    span.html("已收藏");
+					count = parseInt(count) + 1;
+					$(".detail-hd-num em:eq(0)").text(count);
+                } else{
+                    i.addClass("icon-shoucangweishoucang").removeClass("icon-shoucangyishoucang font-red");
+                    span.html("收藏");
+					count = parseInt(count) - 1;
+					$(".detail-hd-num em:eq(0)").text(count);
+                }
+            } else if (res.errorCode == 40000) {
+                window.location.href="/login?goto=/fuwu/$fuwuDetailVo.fuwu.id/detail"
+            }
+        });
+    });
+})
+</script>

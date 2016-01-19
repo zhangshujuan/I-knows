@@ -1,0 +1,209 @@
+09:00:06,094 INFO [org.springframework.web.context.ContextLoader] - Root WebApplicationContext: initialization started
+09:00:06,143 INFO [org.springframework.web.context.support.XmlWebApplicationContext] - Refreshing Root WebApplicationContext: startup date [Tue Dec 01 09:00:06 CST 2015]; root of context hierarchy
+09:00:06,170 INFO [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring.xml]
+09:00:06,304 INFO [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-sys.xml]
+09:00:06,319 INFO [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-tx.xml]
+09:00:06,458 INFO [org.springframework.beans.factory.config.PropertiesFactoryBean] - Loading properties file from class path resource [jdbc.properties]
+09:00:06,459 INFO [org.springframework.beans.factory.config.PropertiesFactoryBean] - Loading properties file from class path resource [redis.properties]
+09:00:06,459 INFO [org.springframework.beans.factory.config.PropertiesFactoryBean] - Loading properties file from class path resource [upyun.properties]
+09:00:06,459 INFO [org.springframework.beans.factory.config.PropertiesFactoryBean] - Loading properties file from class path resource [ytx.properties]
+09:00:06,478 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+09:00:06,480 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+09:00:06,657 INFO [com.mchange.v2.log.MLog] - MLog clients using log4j logging.
+09:00:06,740 INFO [com.mchange.v2.c3p0.C3P0Registry] - Initializing c3p0-0.9.2.1 [built 20-March-2013 10:47:27 +0000; debug? true; trace: 10]
+09:00:07,056 INFO [org.springframework.web.context.ContextLoader] - Root WebApplicationContext: initialization completed in 961 ms
+09:00:07,073 INFO [org.springframework.web.servlet.DispatcherServlet] - FrameworkServlet 'spring': initialization started
+09:00:07,075 INFO [org.springframework.web.context.support.XmlWebApplicationContext] - Refreshing WebApplicationContext for namespace 'spring-servlet': startup date [Tue Dec 01 09:00:07 CST 2015]; parent: Root WebApplicationContext
+09:00:07,075 INFO [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [spring-mvc.xml]
+09:00:07,167 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+09:00:07,266 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/ajax/address],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.common.ajax.AddressController.allAddress()
+09:00:07,266 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/ajax/industry],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.common.ajax.IndustryController.allIndustry()
+09:00:07,267 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/error],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.exception.ExceptionController.error()
+09:00:07,268 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/fuwu/{fuwuId}/collect],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.fuwu.FuwuCollectionController.collect(javax.servlet.http.HttpServletRequest,int)
+09:00:07,269 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.fuwu.FuwuController.index(org.springframework.ui.ModelMap)
+09:00:07,269 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/fuwu/{fuwuId}/detail],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.fuwu.FuwuController.detail(javax.servlet.http.HttpServletRequest,int)
+09:00:07,269 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/fuwu/industry/{industryId}],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.fuwu.FuwuListController.fuwuList(javax.servlet.http.HttpServletRequest,int)
+09:00:07,270 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.login.LoginController.login(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+09:00:07,270 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/logout],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.login.LoginController.logout(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+09:00:07,270 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/ajax/send/code],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.login.LoginController.sendVerificationCode(javax.servlet.http.HttpServletRequest)
+09:00:07,270 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/login],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.login.LoginController.loginView(javax.servlet.http.HttpServletRequest)
+09:00:07,270 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/attend/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.member.AttendMemberController.index()
+09:00:07,271 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/attend/attend],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.member.AttendMemberController.attend(com.gaoding.domain.po.member.AttendMember)
+09:00:07,271 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/member/balance/detail],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.member.MemberAccountController.balanceList(javax.servlet.http.HttpServletRequest,int)
+09:00:07,271 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/member/balance],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.member.MemberAccountController.balance(javax.servlet.http.HttpServletRequest)
+09:00:07,271 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/member/apply/seller],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.member.MemberApplySellerController.applySeller(javax.servlet.http.HttpServletRequest)
+09:00:07,272 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/store/collection],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.member.MemberCollectionController.collectionStoreList(javax.servlet.http.HttpServletRequest)
+09:00:07,272 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/fuwu/collection],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.member.MemberCollectionController.collectionFuwuList(javax.servlet.http.HttpServletRequest)
+09:00:07,272 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/member/me],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.member.MemberController.meView()
+09:00:07,273 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/member/profile],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.member.MemberProfileController.profile(javax.servlet.http.HttpServletRequest)
+09:00:07,273 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/member/save/profile],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.member.MemberProfileController.saveProfile(javax.servlet.http.HttpServletRequest)
+09:00:07,274 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/generate],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.BuildOrderController.post(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,274 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/fuwu/{fuwuId}/buy],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.BuildOrderController.fillInfoView(javax.servlet.http.HttpServletRequest,int)
+09:00:07,274 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/info],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.BuildOrderController.postMemberInfo(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,274 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/demand],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.BuildOrderController.demandView(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,274 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/demand],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.BuildOrderController.postDemand(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,274 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/generate],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.BuildOrderController.buildOrderView(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,274 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/buyer/confirm],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.BuyerHandleOrderController.buyerConfirm(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,275 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/comment],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.OrderCommentController.comment(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,275 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/comment],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.OrderCommentController.commentView(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,275 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/detail],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.OrderDetailController.orderDetail(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,276 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/list],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.OrderListController.list(javax.servlet.http.HttpServletRequest)
+09:00:07,276 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/buyer/list],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.OrderListController.buyerList(javax.servlet.http.HttpServletRequest)
+09:00:07,276 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/seller/list],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.OrderListController.sellerlist(javax.servlet.http.HttpServletRequest)
+09:00:07,276 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/weixinpay],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.OrderWeixinpayController.payView(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,277 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/seller/complete],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.SellerHandleOrderController.completeOrderPhase(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,277 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/change/price],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.SellerHandleOrderController.changePrice(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,277 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/seller/accept],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.SellerHandleOrderController.acceptOrder(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,277 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/order/{orderNo}/seller/refuse],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.order.SellerHandleOrderController.refuseOrder(javax.servlet.http.HttpServletRequest,java.lang.String)
+09:00:07,278 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/seller/{sellerId}/ask],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.store.AskController.askView(javax.servlet.http.HttpServletRequest,int)
+09:00:07,278 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/seller/{sellerId}/ask],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.store.AskController.ask(javax.servlet.http.HttpServletRequest,int)
+09:00:07,278 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/store/{storeId}/collect],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.store.StoreController.collect(javax.servlet.http.HttpServletRequest,int)
+09:00:07,278 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/store/{storeId}],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.store.StoreController.storeView(javax.servlet.http.HttpServletRequest,int)
+09:00:07,279 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/weixin/index],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.weixin.WeixinController.handleIndexGetRequest(javax.servlet.http.HttpServletRequest)
+09:00:07,279 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/weixin/index],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.weixin.WeixinController.handleIndexPostRequest(javax.servlet.http.HttpServletRequest)
+09:00:07,279 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping] - Mapped "{[/weixin/pay/callback],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.gaoding.h5.controller.weixin.WeixinPayCallbackController.payCallback(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+09:00:07,524 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-servlet': startup date [Tue Dec 01 09:00:07 CST 2015]; parent: Root WebApplicationContext
+09:00:07,554 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'spring-servlet': startup date [Tue Dec 01 09:00:07 CST 2015]; parent: Root WebApplicationContext
+09:00:07,579 INFO [org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver] - Detected @ExceptionHandler methods in exceptionHandlerAdvice
+09:00:07,640 INFO [com.gaoding.framework.conf.Config] - load properties config file [/server.properties].
+09:00:07,692 INFO [org.springframework.web.servlet.view.velocity.VelocityConfigurer] - Loading Velocity config from [class path resource [velocity.properties]]
+09:00:07,694 INFO [org.springframework.web.servlet.view.velocity.VelocityConfigurer] - ClasspathResourceLoader with name 'springMacro' added to configured VelocityEngine
+09:00:07,774 INFO [org.springframework.web.servlet.DispatcherServlet] - FrameworkServlet 'spring': initialization completed in 701 ms
+09:17:04,683 INFO [com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource] - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 2, acquireRetryAttempts -> 120, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 320000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge16d9dp9idanoijzg|86186f, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge16d9dp9idanoijzg|86186f, idleConnectionTestPeriod -> 120, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://192.168.1.16:3310/gaoding_member?jdbcCompliantTruncation=false, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 600, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 50, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+09:17:04,985 INFO [com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource] - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 2, acquireRetryAttempts -> 120, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 320000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge16d9dp9idanoijzg|2fb4ed, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge16d9dp9idanoijzg|2fb4ed, idleConnectionTestPeriod -> 120, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://192.168.1.16:3310/gaoding_trade?jdbcCompliantTruncation=false, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 600, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 50, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 10, numHelperThreads -> 3, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+09:17:05,853 WARN [org.springframework.web.servlet.PageNotFound] - No mapping found for HTTP request with URI [/favicon.ico] in DispatcherServlet with name 'spring'
+09:17:05,858 WARN [org.springframework.web.servlet.PageNotFound] - No mapping found for HTTP request with URI [/pagenotfound.html] in DispatcherServlet with name 'spring'
+10:36:23,377 INFO [com.gaoding.service.weixin.WeixinConfig] - load properties config file [/weixin.properties]
+10:36:23,425 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - <xml><appid>wxa8fe334f3f23083c</appid><body>111</body><mch_id>1250411901</mch_id><nonce_str>2u9JtSFM5iza2KuwjmBG9ZLjVCbBATkg</nonce_str><notify_url>http://gaoding.renhe.cn:81/weixin/pay/callback</notify_url><out_trade_no>20151201103623939441</out_trade_no><spbill_create_ip>127.0.0.1</spbill_create_ip><total_fee>2200</total_fee><trade_type>NATIVE</trade_type><sign>D2073A6B2958348A624263A098CB0973</sign></xml>
+10:36:24,412 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - weixin unifieldorder response.
+<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxa8fe334f3f23083c]]></appid>
+<mch_id><![CDATA[1250411901]]></mch_id>
+<nonce_str><![CDATA[b1cZQqnMvsCxMQtB]]></nonce_str>
+<sign><![CDATA[A088E596285415ED099D5A60425B8060]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20151201103626afd69ceb070415780032]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=x30zS2l]]></code_url>
+</xml>
+10:48:15,495 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - <xml><appid>wxa8fe334f3f23083c</appid><body>111</body><mch_id>1250411901</mch_id><nonce_str>6EGZ1LbqIoIFeVIykOIIGebxieqF5lQu</nonce_str><notify_url>http://gaoding.renhe.cn:81/weixin/pay/callback</notify_url><out_trade_no>20151201104815987269</out_trade_no><spbill_create_ip>127.0.0.1</spbill_create_ip><total_fee>2200</total_fee><trade_type>NATIVE</trade_type><sign>4BA75816D96EBBAAE5FCB37A688C3106</sign></xml>
+10:48:16,003 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - weixin unifieldorder response.
+<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxa8fe334f3f23083c]]></appid>
+<mch_id><![CDATA[1250411901]]></mch_id>
+<nonce_str><![CDATA[O1fTUGchidPswXdj]]></nonce_str>
+<sign><![CDATA[EA11B6FD010BCD7419AD8C94DABA6F00]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20151201104817ddc5260b0a0008115762]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=WfApBsV]]></code_url>
+</xml>
+10:48:58,848 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - <xml><appid>wxa8fe334f3f23083c</appid><body>王文生的测试服务包</body><mch_id>1250411901</mch_id><nonce_str>V4JUqMpUoCmqt3UO9HlFl3YB2Lh5IDgs</nonce_str><notify_url>http://gaoding.renhe.cn:81/weixin/pay/callback</notify_url><out_trade_no>20151201104858432085</out_trade_no><spbill_create_ip>127.0.0.1</spbill_create_ip><total_fee>1</total_fee><trade_type>NATIVE</trade_type><sign>6729B540E3608CD1A310BF354FB9DB3A</sign></xml>
+10:48:59,169 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - weixin unifieldorder response.
+<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxa8fe334f3f23083c]]></appid>
+<mch_id><![CDATA[1250411901]]></mch_id>
+<nonce_str><![CDATA[Bxlmv5X9T89PFdzu]]></nonce_str>
+<sign><![CDATA[DA87710CF2A597840BD6C7D1EAFBD6D7]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201512011049014ff63f839b0477711687]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=Dyc62ou]]></code_url>
+</xml>
+10:50:07,020 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - <xml><appid>wxa8fe334f3f23083c</appid><body>111</body><mch_id>1250411901</mch_id><nonce_str>E9P6sD3sm5Mpmi1r2WkbBBQevlWGCHUM</nonce_str><notify_url>http://gaoding.renhe.cn:81/weixin/pay/callback</notify_url><out_trade_no>20151201105007565196</out_trade_no><spbill_create_ip>127.0.0.1</spbill_create_ip><total_fee>2200</total_fee><trade_type>NATIVE</trade_type><sign>B06F48357ED91AD93F5AA005D6B5CC4C</sign></xml>
+10:50:07,358 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - weixin unifieldorder response.
+<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxa8fe334f3f23083c]]></appid>
+<mch_id><![CDATA[1250411901]]></mch_id>
+<nonce_str><![CDATA[eywf4mWWBIhz7oie]]></nonce_str>
+<sign><![CDATA[5363AF4FDB4366CF7A2672B432183818]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20151201105009e693b1f27c0642987882]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=SjT9Z83]]></code_url>
+</xml>
+14:36:27,108 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - <xml><appid>wxa8fe334f3f23083c</appid><body>111</body><mch_id>1250411901</mch_id><nonce_str>vkAQ3SXlj7OwXRCxowLAn6dUJra8dbI9</nonce_str><notify_url>http://gaoding.renhe.cn:81/weixin/pay/callback</notify_url><out_trade_no>20151201143627984698</out_trade_no><spbill_create_ip>127.0.0.1</spbill_create_ip><total_fee>2200</total_fee><trade_type>NATIVE</trade_type><sign>CC973A2CCE41B53D8379BF78A5905900</sign></xml>
+14:36:27,432 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - weixin unifieldorder response.
+<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxa8fe334f3f23083c]]></appid>
+<mch_id><![CDATA[1250411901]]></mch_id>
+<nonce_str><![CDATA[NA94nlr1itq3xbKq]]></nonce_str>
+<sign><![CDATA[00C2E458C500CA6C8027712312E3E610]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20151201143629e530a51dad0046888479]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=cskwk2r]]></code_url>
+</xml>
+15:08:42,013 WARN [org.springframework.web.servlet.PageNotFound] - No mapping found for HTTP request with URI [/order/buyer/%3Cimg%20class=] in DispatcherServlet with name 'spring'
+15:08:42,014 WARN [org.springframework.web.servlet.PageNotFound] - No mapping found for HTTP request with URI [/pagenotfound.html] in DispatcherServlet with name 'spring'
+15:54:02,410 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - <xml><appid>wxa8fe334f3f23083c</appid><body>111</body><mch_id>1250411901</mch_id><nonce_str>CeGCPl7MwvYuvaHmax6YbhE1iOfAbWt1</nonce_str><notify_url>http://gaoding.renhe.cn:81/weixin/pay/callback</notify_url><out_trade_no>20151201155402042050</out_trade_no><spbill_create_ip>127.0.0.1</spbill_create_ip><total_fee>2200</total_fee><trade_type>NATIVE</trade_type><sign>96AE7649BC2FCAF7E6092C6763BD1CBA</sign></xml>
+15:54:02,775 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - weixin unifieldorder response.
+<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxa8fe334f3f23083c]]></appid>
+<mch_id><![CDATA[1250411901]]></mch_id>
+<nonce_str><![CDATA[aA7QXUeuvna3sYdK]]></nonce_str>
+<sign><![CDATA[E5A1D908109281EB4B2636D4284D1F30]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20151201155404da356ab0850271811383]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=Hx2jkIl]]></code_url>
+</xml>
+16:08:42,498 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - <xml><appid>wxa8fe334f3f23083c</appid><body>111</body><mch_id>1250411901</mch_id><nonce_str>xjf4E7fnG4WpTm1dCfN2Jh3ikWnCxwKJ</nonce_str><notify_url>http://gaoding.renhe.cn:81/weixin/pay/callback</notify_url><out_trade_no>20151201160842405048</out_trade_no><spbill_create_ip>127.0.0.1</spbill_create_ip><total_fee>2200</total_fee><trade_type>NATIVE</trade_type><sign>F3661BC919DF3F501851F30C3DF9A1F7</sign></xml>
+16:08:42,839 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - weixin unifieldorder response.
+<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxa8fe334f3f23083c]]></appid>
+<mch_id><![CDATA[1250411901]]></mch_id>
+<nonce_str><![CDATA[RxfjzFmOLM6Nn4Wb]]></nonce_str>
+<sign><![CDATA[A74F921DA56EDEEE2DC6F1E4BEE9A4E0]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20151201160844730c78c1a30157823472]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=i7OgKEe]]></code_url>
+</xml>
+16:08:46,500 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - <xml><appid>wxa8fe334f3f23083c</appid><body>111</body><mch_id>1250411901</mch_id><nonce_str>7A15goZ5M706aPWxUsPXqW0eOKRLcxbB</nonce_str><notify_url>http://gaoding.renhe.cn:81/weixin/pay/callback</notify_url><out_trade_no>20151201160846523712</out_trade_no><spbill_create_ip>127.0.0.1</spbill_create_ip><total_fee>2200</total_fee><trade_type>NATIVE</trade_type><sign>8FC76B7CB24463CB6BED31DB63C177FA</sign></xml>
+16:08:46,920 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - weixin unifieldorder response.
+<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxa8fe334f3f23083c]]></appid>
+<mch_id><![CDATA[1250411901]]></mch_id>
+<nonce_str><![CDATA[HbUu8ISfOpdopAZ3]]></nonce_str>
+<sign><![CDATA[AD63002CE7752E090865AE228BAB1E9F]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20151201160848e2c3c2a0da0179059920]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=HRTkRZC]]></code_url>
+</xml>
+16:17:19,224 ERROR [org.apache.velocity] - ResourceManager : unable to find resource 'views/.vm' in any resource loader.
+16:42:00,733 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - <xml><appid>wxa8fe334f3f23083c</appid><body>量身定制一篇百万量级的公关文案</body><mch_id>1250411901</mch_id><nonce_str>PKc7nbP9CilcnZG6jQpprwZfgtEdpuUP</nonce_str><notify_url>http://gaoding.renhe.cn:81/weixin/pay/callback</notify_url><out_trade_no>20151201164200743379</out_trade_no><spbill_create_ip>127.0.0.1</spbill_create_ip><total_fee>1</total_fee><trade_type>NATIVE</trade_type><sign>6CB31F0999894AA66BED99EB563928EC</sign></xml>
+16:42:01,050 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - weixin unifieldorder response.
+<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxa8fe334f3f23083c]]></appid>
+<mch_id><![CDATA[1250411901]]></mch_id>
+<nonce_str><![CDATA[o1oicwCtlHYZ9AHx]]></nonce_str>
+<sign><![CDATA[29353F56166DC8C29132E345AE975A57]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20151201164202ffeeb03c430711639421]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=qbA12NK]]></code_url>
+</xml>
+16:51:01,323 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - <xml><appid>wxa8fe334f3f23083c</appid><body>111</body><mch_id>1250411901</mch_id><nonce_str>43wTbdQLTGib2mFzUjmec9I8vnZu7FdA</nonce_str><notify_url>http://gaoding.renhe.cn:81/weixin/pay/callback</notify_url><out_trade_no>20151201165101684189</out_trade_no><spbill_create_ip>127.0.0.1</spbill_create_ip><total_fee>2200</total_fee><trade_type>NATIVE</trade_type><sign>B8B1FBA8DB16C7A5E80665A6235E05C9</sign></xml>
+16:51:01,668 INFO [com.gaoding.service.weixin.impl.WeixinPayServiceImpl] - weixin unifieldorder response.
+<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxa8fe334f3f23083c]]></appid>
+<mch_id><![CDATA[1250411901]]></mch_id>
+<nonce_str><![CDATA[jhvcp9xq2YLQzVPH]]></nonce_str>
+<sign><![CDATA[BC67F494E84B34FDA8B9EBCA2D27E6B8]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2015120116510374390a711d0259337858]]></prepay_id>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<code_url><![CDATA[weixin://wxpay/bizpayurl?pr=2MkY8Gw]]></code_url>
+</xml>

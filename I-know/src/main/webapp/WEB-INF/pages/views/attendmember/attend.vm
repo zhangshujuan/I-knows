@@ -1,0 +1,109 @@
+#set($layout = "layout/commonLayout.vm")
+#set($title = "赞服务卖家招募")
+<link rel="stylesheet" href="$staticHttp/styles/attend_index.css">
+<script type="text/javascript" src="http://$staticDomain/build/lib/mobile-util.js"></script>
+<script type="text/javascript" src="http://$staticDomain/build/lib/jquery/jquery-1-7-2-min.js"></script>
+<div class="swipe-wrap" id="slip">
+	<article class="swipe">
+		<div class="swipe-box sec1">
+			<img src="http://$staticDomain/images/banner2-first-750x1334.png"  class="banner_img"/>
+		</div>
+		<div class="swipe-box sec2">
+			<img src="http://$staticDomain/images/banner2-two2-750x1334.png"  class="banner_img"/>
+		</div>
+		<div class="swipe-box sec3">
+			<img src="http://$staticDomain/images/banner2-three2-750x1334.png"  class="banner_img"/>
+		</div>
+		<div class="swipe-box sec4">
+			<img src="http://$staticDomain/images/join2-466x272.png" class="top-img"/>
+			<form class="join" name="attendfrom" id="attendfrom">
+    			<input type="text" class="name" name="name" id="name" placeholder="姓名" value="">
+    			<input type="text" class="phone" name="mobile" id="mobile" placeholder="电话" value="">
+    			<input type="text" class="email" name="email" id="email" placeholder="邮箱" value="">
+    			<textarea name="description" class="description" id="description" placeholder="提供服务简要描述" value=""></textarea>
+    			<button class="submit" type="button" id="attend">提交</button>
+				<input type="reset" name="reset" style="display: none;" />
+				<img src="http://$staticDomain/images/bottom2-382x33.png" class="bottom-img"/>
+    		</form>
+		</div>
+	</article>
+</div>
+
+## 微信分享
+#if($weixinJSData)
+    #set($shareImage = "http://$staticDomain/images/logo_600.jpg")
+    #set($shareTitle = "抢服务电商第一桶金，开店限免")
+    #set($shareDesc = "赞服务，为个人专业服务提供者解决推广、流量、客源、信任难题，点击查看！")
+    #renheparse("common/weixinShare.vm")
+#end
+
+<script type="text/javascript" src="http://$staticDomain/build/lib/slip.js"></script>
+<script type="text/javascript">
+  var container = document.getElementById('slip');
+  var pages = document.querySelectorAll('.swipe-box');
+  var slip = Slip(container, 'y').webapp(pages);
+  $("#attend").bind("click",function(e){
+  	 var flag =  valiteFrom();
+	 if(flag){
+	 	$("#attend").attr("disabled","disabled");
+         var url = "/attend/attend";
+        	$.ajax({
+        		url:url,
+        		async:false,
+        		type:"post",
+        		dataType:"json",
+        		data:$('[name="attendfrom"]').serializeArray(),
+        		success:function(data){
+                    //发送成功
+        			if(data.successFlag){
+							$("input[type=reset]").trigger("click");
+							$("#attend").removeAttr("disabled");
+        					alert("您的申请已提交成功，赞服务的工作人员将会在24小时内与您联系，谢谢！");
+        			}else{
+        				
+        			}
+        		}
+        	});
+		}
+  });  
+  
+  function valiteFrom(){
+  	if($("#name").val() == ""){
+		alert("姓名不能为空");
+		return false;
+	}
+	if($("#mobile").val()==""){
+		alert("手机号码不能为空");
+		return false;
+	}else{
+		var falg = /^(\(\d{3,4}\)|\d{3,4})?(-)?\d{8}$/.test($("#mobile").val());
+		var flagmobile= /^(13[0-9]{9})|(15[89][0-9]{8})$/.test($("#mobile").val());
+		if(!(falg||flagmobile)){
+		 
+		 	alert("手机号码格式或者固定号码格式不对");
+			return false;
+		 }
+	}
+	
+	if($("#email").val()!="" && !isEmail($("#email").val())){
+		alert("邮箱格式不对");
+		return false;
+	}
+	
+	if($("#description").val()!="" && $("#description").val().length>=80){
+		alert("服务描述不能过长");
+		return false;
+	}
+	return true;
+  }
+  
+  
+  function isEmail(val){
+          var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/;
+
+          if(!myreg.test(val)){
+		 	return false;
+		  }
+         return true;
+  }
+</script>

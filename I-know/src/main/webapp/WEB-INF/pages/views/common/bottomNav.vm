@@ -1,0 +1,14 @@
+<div class="bottom">
+    <div class="list" data-href="/index">
+        <i class="iconfont gd-dis #if($navIndex == 1) icon-xingyetubiao01 font-red #else icon-xingyetubiao04 #end"></i>
+        <div class="list-text #if($navIndex == 1)font-red #end" >首页</div>
+    </div>
+    <div class="list" data-href="/order/list">
+        <i class="iconfont gd-dis  #if($navIndex == 2) icon-xingyetubiao02 font-red  #else icon-xingyetubiao05 #end"></i>
+        <div class="list-text #if($navIndex == 2)font-red #end">订单</div>
+    </div>
+    <div class="list" data-href="/member/me">
+        <i class="iconfont gd-dis  #if($navIndex == 3) icon-xingyetubiao03 font-red #else icon-xingyetubiao06 #end"></i>
+        <div class="list-text #if($navIndex == 3)font-red #end">我</div>
+    </div>
+</div>

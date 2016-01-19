@@ -1,0 +1,49 @@
+#set($title = "订单列表")
+#set($layout = "layout/commonLayout.vm")
+
+<link rel="stylesheet" type="text/css" href="$staticHttp/styles/zfw-list.css">
+<div class="collect-detail">
+    <div class="nav">
+        <ul class="cf">
+            <li class="fl gd-1-2">
+                <div data-href="/fuwu/collection">
+                    <span>服务</span>
+                </div>
+            </li>
+            <li class="fl gd-1-2">
+                <div class="active">
+                    <span>店铺</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="panel-group bg-tans">
+        #foreach($seller in $sellerList)
+            <div class="panel mb20">
+                <div class="panel-bd media" data-href="/store/$seller.id">
+                    <div class="media-left"><img class="userimg circle" src="$seller.userface"></div>
+                    <div class="media-body">
+                        <div class="panel-title ft-bs">$seller.name</div>
+                        <p class="ft-gray">$seller.company #if($seller.company != "" && $seller.title != "") / #end $seller.title</p>
+                        <p class="cf mt20"><span class="fl"><i class="iconfont">&#xe637;</i>  杭州</span><span class="fr ft-red" style="display: none;"><i class="iconfont">&#xe604;</i> 收藏</span></p>
+                    </div>
+                </div>
+                <div class="panel-footer cf">
+                    <span class="fr ft-red status-text cancel-collect" sellerId="$seller.id">取消收藏</span>
+                </div>
+            </div>
+        #end
+    </div>
+</div>
+<script type="text/javascript">
+    seajs.use(["jquery"],function($){
+        $('.cancel-collect').click(function() {
+            var sellerId = $(this).attr('sellerId');
+            var storePanel = $(this).parent().parent();
+            $.post("/store/" + sellerId + "/collect", function(data) {
+                storePanel.css('display', 'none');
+                gaoding.alert("已取消收藏");
+            });
+        });
+    })
+</script>

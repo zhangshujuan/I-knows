@@ -1,0 +1,122 @@
+#set($title="赞服务-专业服务交易平台")
+#set($page_keywords="赞服务")
+#set($page_description="赞服务，专业服务交易平台，为猎头、法律、IT、营销、金融、培训等专业服务领域的提供者和需求者搭建平台，一站式服务")
+#set($layout = "layout/commonLayout.vm")
+<link rel="stylesheet" type="text/css" href="$staticHttp/styles/zfw-list.css">
+<link rel="stylesheet" href="$staticHttp/styles/my.css">
+
+<div class="flexslider">
+	<ul class="slides">
+		#foreach($banner in $bannerList)
+            <li data-href="$banner.link" style="background:url(${bannerDomain}$banner.img) 50% 0 no-repeat;"></li>
+		#end
+	</ul>
+</div>
+<div class="zfw-list-nav">
+	<ul class="cf">
+		<li>
+			<div data-href="/fuwu/industry/1">
+				<i class="iconfont  icon-xingyetubiao17 font-red"></i>
+				<span>招聘</span>
+			</div>
+		</li>
+		<li>
+			<div data-href="/fuwu/industry/2">
+				<i class="iconfont  icon-xingyetubiaohuaban5fuben12 font-red"></i>
+				<span>法律</span>
+			</div>
+		</li>
+		<li>
+			<div data-href="/fuwu/industry/3">
+				<i class="iconfont  icon-xingyetubiaohuaban5fuben13 font-red"></i>
+				<span>管理</span>
+			</div>
+		</li>
+		<li>
+			<div data-href="/fuwu/industry/4" class="no-right-border">
+				<i class="iconfont  icon-xingyetubiaohuaban5fuben14 font-red"></i>
+				<span>营销</span>
+			</div>
+		</li>
+		<li>
+			<div data-href="/fuwu/industry/5">
+				<i class="iconfont  icon-xingyetubiao21 font-red"></i>
+				<span>金融</span>
+			</div>
+		</li>
+		<li>
+			<div data-href="/fuwu/industry/6">
+				<i class="iconfont  icon-xingyetubiaohuaban5fuben16 font-red"></i>
+				<span>互联网</span>
+			</div>
+		</li>
+		<li>
+			<div data-href="/fuwu/industry/7">
+				<i class="iconfont  icon-xingyetubiaohuaban5fuben17 font-red"></i>
+				<span>培训</span>
+			</div>
+		</li>
+		<li>
+			<div data-href="/fuwu/industry/8" class="no-right-border">
+				<i class="iconfont  icon-xingyetubiaohuaban5fuben18 font-red"></i>
+				<span>其它</span>
+			</div>
+		</li>
+	</ul>
+</div>
+<div class="main-title">精选服务</div>
+<div class="panel-group border-bottom">
+	#foreach($fuwuItemVo in $fuwuItemVoList)
+        <div class="panel" data-href="/fuwu/$fuwuItemVo.fuwu.id/detail">
+            <div class="panel-bd">
+                <div class="panel-title text-ellipsis">$fuwuItemVo.fuwu.name</div>
+                <div class="taglist cf">
+					#foreach($tag in $fuwuItemVo.fuwuTagList)
+                        <span class="tag">$tag.tag</span>
+					#end
+                </div>
+                <div class="price-info">
+                    #if ($fuwuItemVo.fuwuActivity)
+                        <span class="activity-price">活动价</span>
+                    #end
+					<span class="rem">¥</span>
+					#if($fuwuItemVo.fuwu.priceType.value == 0)
+						<span class="price">$fuwuItemVo.fuwu.price</span>
+					#else
+						<span class="price">$fuwuItemVo.fuwu.priceStart</span>
+						<span class="per"> 起</span>
+					#end
+                    #if ($fuwuItemVo.fuwuActivity)
+                        <span class="dis-price"><line></line><span>￥</span>$fuwuItemVo.fuwuActivity.originalPrice
+                        #if($fuwuItemVo.fuwu.priceType.value == 3)<span class="per"> 起</span>#end
+                        </span>
+                    #end
+                </div>
+                <div class="gdt-card">
+                    <span class="userimgbox"><div class="circle" style="box-sizing: border-box; line-height: 0; width: 1.92rem; height: 1.92rem; border:2px solid #E8E8E8;background-image: url($fuwuItemVo.member.userface); background-size: contain; background-position: 50% 50%; background-repeat: no-repeat;"></div></span>
+                    <p class="ellipsis"><span class="member-name">$fuwuItemVo.member.name</span>$fuwuItemVo.member.title #if($fuwuItemVo.member.company != "" || $fuwuItemVo.member.title != "") / #end $fuwuItemVo.member.company</p>
+                </div>
+            </div>
+        </div>
+	#end
+</div>
+#set($navIndex = 1)
+#renheparse("common/bottomNav.vm")
+
+## 微信分享
+#if($weixinJSData)
+    #set($shareImage = "http://$staticDomain/images/logo_600.jpg")
+    #set($shareTitle = "赞服务")
+    #set($shareDesc = "赞服务是一个让个人专业能力变现的电商平台，为通过专业技能执业的个人而生，有了赞服务，专业能力提供者可以开店、推广，企业或其他买家可以在这里找到想要的专业外包服务提供者。")
+    #renheparse("common/weixinShare.vm")
+#end
+
+<script type="text/javascript">
+seajs.use(["$","gaoding","flexSlider"],function(){
+	$('.flexslider').flexslider({
+		directionNav: false,
+		pauseOnAction: false,
+		animation:"swing"
+	});
+})
+</script>

@@ -1,0 +1,62 @@
+body,
+ul,
+h1,
+p,
+ul,
+span {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  -moz-user-select: none;
+  max-width: 100%;
+  margin: 0 auto;
+}
+* {
+  margin: 0;
+  padding: 0;
+  color: #666;
+  font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, Verdana, 'Hiragino Sans GB', 'Noto Sans CJK SC', 'Source Han Sans CN', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, sans-serif;
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.clearfix {
+  *zoom: 1;
+}
+.welcome-contain {
+  background: url("/images/welcome-bg-750x1207-2016-1-13.png") top center;
+  width: 100%;
+  padding-top: 19.41333333rem;
+  padding-bottom: 2.88rem;
+  background-size: 16rem 25.74933333rem;
+  background-repeat: no-repeat;
+}
+.text-center {
+  text-align: center;
+}
+.button {
+  width: 5.54666667rem;
+  height: 1.664rem;
+  border-radius: 0.832rem;
+  color: #fff;
+  font-size: 0.68266667rem;
+  background: #0c6bb9;
+  line-height: 1.664rem;
+  display: inline-block;
+}
+.agree-deal {
+  font-size: 0.42666667rem;
+  color: #666;
+  padding-left: 0.64rem;
+  margin-top: 1.17333333rem;
+}
+.agree-deal input {
+  width: 0.42666667rem;
+  height: 0.42666667rem;
+}

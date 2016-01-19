@@ -1,0 +1,11 @@
+#set($layout = "layout/commonLayout.vm")
+#set($title = "余额")
+<link rel="stylesheet" href="$staticHttp/styles/personinfo.css">
+
+<div class="person-balance-icon"><img src="http://$staticDomain/images/person-balance-178x146.png"></div>
+<div class="my-balance">我的余额</div>
+<div class="balance-num">￥$balanceValue</div>
+<button class="btn btn-white btn80 radius-lg" data-href="/member/balance/detail">明细</button>
+<button class="btn btn-white btn80 radius-lg" style="display: none;">提现</button>
+
+<script type="text/javascript">seajs.use("$",function(){})</script>

@@ -1,0 +1,42 @@
+#set($title = "发表评论")
+#set($layout = "layout/commonLayout.vm")
+
+<link rel="stylesheet" href="$staticHttp/styles/comment.css">
+
+<form id="commentForm" data-remote="true" data-type="json" action="/order/$orderNo/comment" method="post">
+<div class="panel">
+    <textarea class="comment" name="content" placeholder="请写下你对服务的感受吧，对他人帮助很大的哦。"></textarea>
+</div>
+<div class="panel panel-item">
+    <div class="fl">服务评分</div>
+    <div class="panel-comment">
+        <label class="iconfont icon-xingyetubiao11" index="1"><input type="radio" name="score" value="1" /></label>
+        <label class="iconfont icon-xingyetubiao11" index="2"><input type="radio" name="score" value="2" /></label>
+        <label class="iconfont icon-xingyetubiao11" index="3"><input type="radio" name="score" value="3" /></label>
+        <label class="iconfont icon-xingyetubiao11" index="4"><input type="radio" name="score" value="4" /></label>
+        <label class="iconfont icon-xingyetubiao11" index="5"><input type="radio" name="score" value="5" /></label>
+    </div>
+</div>
+<div class="nav-fix-bt"><button class="btn btn-danger btn100 btn-bottom">发表评价</button></div>
+</form>
+<script type="text/javascript">
+    seajs.use(["$", "rails"],function(){
+        $(".panel-comment label").click(function(){
+            var $this =$(this);
+            var index = $this.attr("index");
+            $(".panel-comment label").addClass("icon-xingyetubiao11").removeClass("font-red icon-xingyetubiao12");
+            for(var i= 0;i<index;i++){
+                $(".panel-comment label:eq("+i+")").addClass("font-red icon-xingyetubiao12").removeClass("icon-xingyetubiao11");
+            }
+        });
+        $("#commentForm").on("ajax:success",function(e,res) {
+            if (res.errorCode == 0) {
+                gaoding.alert("发表成功", function() {
+                    window.location.href="/order/$orderNo/detail";
+                });
+            } else {
+                gaoding.alert(res.errorInfo);
+            }
+        })
+    });
+</script>
